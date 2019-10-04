@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -29,7 +28,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun setContentView(layoutResID: Int) {
-        Toast.makeText(this, "view1 called", Toast.LENGTH_SHORT).show()
 
         val constraintLayout: ConstraintLayout =
             LayoutInflater.from(this).inflate(layoutResID, null) as ConstraintLayout
@@ -43,7 +41,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun setContentView(view: View?) {
-        Toast.makeText(this, "view called2", Toast.LENGTH_SHORT).show()
         val constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
@@ -52,13 +49,11 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        Toast.makeText(this, "view called3", Toast.LENGTH_SHORT).show()
-
         val constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         super.setContentView(view, params)
-        //        showProgressBar()
+                showProgressBar()
 
     }
 
