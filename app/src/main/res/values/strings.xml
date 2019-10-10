@@ -4,13 +4,11 @@
     <string name="navigation_drawer_header_title" translatable="false">LEGO®</string>
 
     <!-- Translatable resources -->
-    <string name="filter" translation_description="Common Filter">Filter</string>
     <string name="grid" translation_description="Common Filter">Switch between grid and list</string>
     <string name="legothemes_title">Browse Themes</string>
     <string name="legosets_title">Browse All Sets</string>
     <string name="legoset_details_title">Set details</string>
     <string name="navigation_drawer_header_content_description">Navigation drawer header logo</string>
-    <string name="santa_claus_quote">Santa Claus will consider this request</string>
     <string name="menu_item_share" translation_description="The label for the Share menu item">Share</string>
     <string name="number_of_parts">Number of parts: %d</string>
     <string name="year">Year: %d</string>

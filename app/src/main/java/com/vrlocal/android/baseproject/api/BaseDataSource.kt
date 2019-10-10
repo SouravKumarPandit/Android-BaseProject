@@ -1,6 +1,6 @@
 package com.vrlocal.android.baseproject.api
 
-import com.vrlocal.android.baseproject.data.Result
+import com.vrlocal.android.baseproject.data.VResult
 import retrofit2.Response
 import timber.log.Timber
 
@@ -9,12 +9,12 @@ import timber.log.Timber
  */
 abstract class BaseDataSource {
 
-    protected suspend fun <T> getResult(call: suspend () -> Response<T>): Result<T> {
+    protected suspend fun <T> getResult(call: suspend () -> Response<T>): VResult<T> {
         try {
             val response = call()
             if (response.isSuccessful) {
                 val body = response.body()
-                if (body != null) return Result.success(body)
+                if (body != null) return VResult.success(body)
             }
             return error(" ${response.code()} ${response.message()}")
         } catch (e: Exception) {
@@ -22,9 +22,9 @@ abstract class BaseDataSource {
         }
     }
 
-    private fun <T> error(message: String): Result<T> {
+    private fun <T> error(message: String): VResult<T> {
         Timber.e(message)
-        return Result.error("Network call has failed for a following reason: $message")
+        return VResult.error("Aw, Snap! found an error")
     }
 
 }

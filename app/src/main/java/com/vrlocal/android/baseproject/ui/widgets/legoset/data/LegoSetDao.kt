@@ -30,4 +30,7 @@ interface LegoSetDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(legoSet: LegoSet)
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertUser(user: User)
 }

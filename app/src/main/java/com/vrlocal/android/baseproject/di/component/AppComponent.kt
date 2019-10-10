@@ -2,20 +2,20 @@ package com.vrlocal.android.baseproject.di.component
 
 import android.app.Application
 import com.vrlocal.android.baseproject.BaseApplication
-import com.vrlocal.android.baseproject.di.AppModule
-import com.vrlocal.android.baseproject.di.MainActivityModule
+import com.vrlocal.android.baseproject.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        AndroidInjectionModule::class,
-        AppModule::class,
-        MainActivityModule::class]
+        AndroidSupportInjectionModule::class,
+        AppModule::class
+
+    ]
 )
 
 interface AppComponent : AndroidInjector<BaseApplication> {

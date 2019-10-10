@@ -8,15 +8,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.data.Result
+import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentThemesBinding
-import com.vrlocal.android.baseproject.di.injectViewModel
+import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
-import dagger.android.support.DaggerFragment
+import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import javax.inject.Inject
 
-class LegoThemeFragment : DaggerFragment() {
+class LegoThemeFragment : BaseFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: LegoThemeViewModel
@@ -46,17 +46,23 @@ class LegoThemeFragment : DaggerFragment() {
         viewModel.legoThemes.removeObservers(viewLifecycleOwner)
         viewModel.legoThemes.observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
-                Result.Status.SUCCESS -> {
+                VResult.Status.SUCCESS -> {
                     (activity as BaseActivity<*, *>).hideProgressBar()
                     result.data?.let { adapter.submitList(it) }
                 }
-                Result.Status.LOADING -> {
+                VResult.Status.LOADING -> {
                     (activity as BaseActivity<*, *>).showProgressBar()
                 }
-                Result.Status.ERROR -> {
+                VResult.Status.ERROR -> {
                     (activity as BaseActivity<*, *>).hideProgressBar()
+                    result.message?.let { showError(it) }
+
+
                     Snackbar.make(binding.root, result.message!!, Snackbar.LENGTH_LONG).show()
                 }
+
+                VResult.Status.NOT_AUTHENTICATED,
+                VResult.Status.AUTHENTICATED->{}
             }
         })
     }

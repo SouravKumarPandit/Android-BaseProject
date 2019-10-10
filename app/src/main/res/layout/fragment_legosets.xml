@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:scrollbars="vertical"
-            tools:context="com.vrlocal.android.baseproject.ui.widgets.home.MainActivity"
+            tools:context="com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity"
             tools:listitem="@layout/list_item_legoset"/>
 
 

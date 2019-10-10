@@ -9,22 +9,22 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.binding.bindImageFromUrl
-import com.vrlocal.android.baseproject.data.Result
+import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegoSetBinding
-import com.vrlocal.android.baseproject.di.injectViewModel
+import com.vrlocal.android.baseproject.di.component.injectViewModel
+import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import com.vrlocal.android.baseproject.ui.hide
 import com.vrlocal.android.baseproject.ui.setTitle
 import com.vrlocal.android.baseproject.ui.show
 import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.util.intentOpenWebsite
 import com.vrlocal.android.baseproject.util.intentShareText
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 /**
  * A fragment representing a single LegoSet detail screen.
  */
-class LegoSetFragment : DaggerFragment(){
+class LegoSetFragment : BaseFragment(){
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -71,15 +71,17 @@ class LegoSetFragment : DaggerFragment(){
     private fun subscribeUi(binding: FragmentLegoSetBinding) {
         viewModel.legoSet.observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
-                Result.Status.SUCCESS -> {
+                VResult.Status.SUCCESS -> {
                     binding.progressBar.hide()
                     result.data?.let { bindView(binding, it) }
                 }
-                Result.Status.LOADING -> binding.progressBar.show()
-                Result.Status.ERROR -> {
+                VResult.Status.LOADING -> binding.progressBar.show()
+                VResult.Status.ERROR -> {
                     binding.progressBar.hide()
                     Snackbar.make(binding.coordinatorLayout, result.message!!, Snackbar.LENGTH_LONG).show()
                 }
+                VResult.Status.NOT_AUTHENTICATED,
+                VResult.Status.AUTHENTICATED->{}
             }
         })
     }

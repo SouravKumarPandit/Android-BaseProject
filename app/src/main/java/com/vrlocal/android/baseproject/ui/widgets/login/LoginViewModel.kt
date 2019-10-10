@@ -1,0 +1,15 @@
+package com.vrlocal.android.baseproject.ui.widgets.login
+
+import androidx.lifecycle.LiveData
+import com.vrlocal.android.baseproject.data.VResult
+import com.vrlocal.android.baseproject.ui.base.BaseViewModel
+import com.vrlocal.android.baseproject.ui.widgets.login.data.LoginRepository
+import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import javax.inject.Inject
+
+class LoginViewModel @Inject constructor(private val repository: LoginRepository) :
+    BaseViewModel<ILoginView>() {
+    fun authenticateUser(userId: Int): LiveData<VResult<User>> =
+        repository.authenticateUser("$userId")
+
+}

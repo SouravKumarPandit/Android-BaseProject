@@ -3,12 +3,12 @@ package com.vrlocal.android.baseproject.worker
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.vrlocal.android.baseproject.data.AppDatabase
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
-import com.vrlocal.android.baseproject.util.DATA_FILENAME
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
+import com.vrlocal.android.baseproject.data.AppDatabase
+import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
+import com.vrlocal.android.baseproject.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
@@ -23,7 +23,7 @@ class SeedDatabaseWorker(
         withContext(Dispatchers.IO) {
 
             try {
-                applicationContext.assets.open(DATA_FILENAME).use { inputStream ->
+                applicationContext.assets.open(Constants.DATA_FILENAME).use { inputStream ->
                     JsonReader(inputStream.reader()).use { jsonReader ->
                         val type = object : TypeToken<List<LegoSet>>() {}.type
                         val list: List<LegoSet> = Gson().fromJson(jsonReader, type)

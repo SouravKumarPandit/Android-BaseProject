@@ -1,7 +1,7 @@
 package com.vrlocal.android.baseproject.ui.widgets.legoset.data
 
 import androidx.paging.PageKeyedDataSource
-import com.vrlocal.android.baseproject.data.Result
+import com.vrlocal.android.baseproject.data.VResult
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -40,11 +40,11 @@ class LegoSetPageDataSource @Inject constructor(
     private fun fetchData(page: Int, pageSize: Int, callback: (List<LegoSet>) -> Unit) {
         scope.launch(getJobErrorHandler()) {
             val response = dataSource.fetchSets(page, pageSize, themeId)
-            if (response.status == Result.Status.SUCCESS) {
+            if (response.status == VResult.Status.SUCCESS) {
                 val results = response.data!!.results
                 dao.insertAll(results)
                 callback(results)
-            } else if (response.status == Result.Status.ERROR) {
+            } else if (response.status == VResult.Status.ERROR) {
                 postError(response.message!!)
             }
         }

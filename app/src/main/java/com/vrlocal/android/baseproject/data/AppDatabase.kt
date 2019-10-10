@@ -12,6 +12,7 @@ import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSetDao
 import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoTheme
 import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoThemeDao
+import com.vrlocal.android.baseproject.util.Constants
 import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 
 /**
@@ -21,11 +22,15 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
     LegoSet::class],
         version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+    abstract class AppDatabase : RoomDatabase() {
 
     abstract fun legoSetDao(): LegoSetDao
 
     abstract fun legoThemeDao(): LegoThemeDao
+
+//    abstract fun userDao(): UserDao
+
+
 
 
     companion object {
@@ -43,7 +48,7 @@ abstract class AppDatabase : RoomDatabase() {
         // Create and pre-populate the database. See this article for more details:
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "legocatalog-db")
+            return Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

@@ -28,7 +28,7 @@
             android:layout_margin="@dimen/margin_normal"
             android:text="@{legoTheme.name}"
             android:gravity="center"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="18sp"
             tools:text="Super Heroes"/>
 
     </androidx.cardview.widget.CardView>

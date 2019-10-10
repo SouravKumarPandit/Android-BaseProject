@@ -1,25 +1,28 @@
 package com.vrlocal.android.baseproject.ui.base
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.ProgressBar
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.snackbar.Snackbar
+import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import dagger.android.support.DaggerAppCompatActivity
 
 
-abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
+@SuppressLint("Registered")
+open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     DaggerAppCompatActivity(), IView {
 
-    protected lateinit var dataBinding: B
-    protected lateinit var baseViewModel: T
+    open lateinit var dataBinding: B
+    open lateinit var baseViewModel: T
 
     private lateinit var mProgressBar: ProgressBar
     private lateinit var frameLayout: FrameLayout
@@ -35,7 +38,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         val initFrame = initFrame()
         constraintLayout.addView(initFrame)
         super.setContentView(constraintLayout)
-        showProgressBar()
+//        showProgressBar()
 
 
     }
@@ -53,7 +56,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         super.setContentView(view, params)
-                showProgressBar()
+        showProgressBar()
 
     }
 
@@ -76,11 +79,11 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         frameLayout.isClickable = visibility
     }
 
-    public fun hideProgressBar() {
+    override fun hideProgressBar() {
         showProgressBar(false)
     }
 
-    public fun showProgressBar() {
+    override fun showProgressBar() {
         showProgressBar(true)
 
     }
@@ -124,9 +127,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
         mProgressBar = ProgressBar(this)
         mProgressBar.visibility = View.GONE
-        //        val mBitmap = BitmapFactory.decodeResource(resources, com.vrlocal.baseandroidproject.R.drawable.side_nav_bar)
-        //        mProgressBar.background=RoundCardDrawable(mBitmap, 45.px.toFloat(),5)
-
+        mProgressBar.elevation = 8f
         val pbParam: FrameLayout.LayoutParams = FrameLayout.LayoutParams(45.px, 45.px)
         pbParam.gravity = Gravity.CENTER
         mProgressBar.layoutParams = pbParam
@@ -136,6 +137,58 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
 
+    override fun onResponse(responseObject: Any?) {
+    }
+
+    override fun showToast(message: String) {
+        Toast.makeText(this,message+"",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showSnackBar(message: String, statusColor: Int) {
+
+        val snackBar = Snackbar.make(
+            frameLayout, message,
+            Snackbar.LENGTH_LONG
+        )
+        val viewGroup = snackBar.view as ViewGroup
+        viewGroup.background =
+            ViewUtils.getGradientDrawable(Color.parseColor("#72A325"), Color.parseColor("#91C22B"))
+        val textView = (viewGroup.getChildAt(0) as ViewGroup).getChildAt(0) as TextView
+//        textView.isSingleLine=true
+        textView.setTextColor(
+            Color.WHITE
+        )
+//        snackBar.setAction("OK") {
+//            snackBar.dismiss()
+//        }
+        snackBar.setActionTextColor(Color.WHITE)
+        snackBar.show()
+
+    }
+
+    override fun showError(error: String) {
+
+        val snackBar = Snackbar.make(
+            frameLayout,
+            "Error : $error",
+            Snackbar.LENGTH_INDEFINITE
+        )
+        val viewGroup = snackBar.view as ViewGroup
+
+        viewGroup.background =
+            ViewUtils.getGradientDrawable(Color.parseColor("#FEA6B1"), Color.parseColor("#EF718D"))
+        val textView = (viewGroup.getChildAt(0) as ViewGroup).getChildAt(0) as TextView
+//        textView.isSingleLine=true
+        textView.setTextColor(
+            Color.WHITE
+        )
+        snackBar.setAction("OK") {
+            snackBar.dismiss()
+        }
+        snackBar.setActionTextColor(Color.WHITE)
+        snackBar.show()
+
+    }
 
 
 }

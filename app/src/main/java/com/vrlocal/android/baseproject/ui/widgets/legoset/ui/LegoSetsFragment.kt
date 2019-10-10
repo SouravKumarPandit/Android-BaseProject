@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.databinding.FragmentLegosetsBinding
-import com.vrlocal.android.baseproject.di.injectViewModel
+import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.GridSpacingItemDecoration
 import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
-import com.vrlocal.android.baseproject.ui.base.BaseActivity
+import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import com.vrlocal.android.baseproject.ui.setTitle
 import com.vrlocal.android.baseproject.util.ConnectivityUtil
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class LegoSetsFragment : DaggerFragment(){
+class LegoSetsFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -34,19 +33,21 @@ class LegoSetsFragment : DaggerFragment(){
     private lateinit var gridLayoutManager: GridLayoutManager
     private val linearDecoration: RecyclerView.ItemDecoration by lazy {
         VerticalItemDecoration(
-                resources.getDimension(R.dimen.margin_normal).toInt())
+            resources.getDimension(R.dimen.margin_normal).toInt()
+        )
     }
     private val gridDecoration: RecyclerView.ItemDecoration by lazy {
         GridSpacingItemDecoration(
-                SPAN_COUNT, resources.getDimension(R.dimen.margin_grid).toInt())
+            SPAN_COUNT, resources.getDimension(R.dimen.margin_grid).toInt()
+        )
     }
 
     private var isLinearLayoutManager: Boolean = false
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         viewModel = injectViewModel(viewModelFactory)
         viewModel.connectivityAvailable = ConnectivityUtil.isConnected()
@@ -62,7 +63,7 @@ class LegoSetsFragment : DaggerFragment(){
 
         args.themeName?.let { setTitle(it) }
         subscribeUi(adapter)
-        (activity as BaseActivity<*,*>).showProgressBar()
+        showProgressBar()
 
         setHasOptionsMenu(true)
         return binding.root
@@ -87,9 +88,9 @@ class LegoSetsFragment : DaggerFragment(){
 
     private fun subscribeUi(adapter: LegoSetAdapter) {
         viewModel.legoSets.observe(viewLifecycleOwner) {
-//            val bindingBaseActivity = activity as BaseActivity
+            //            val bindingBaseActivity = activity as BaseActivity
 
-            (activity as BaseActivity<*,*>).hideProgressBar()
+            hideProgressBar()
             adapter.submitList(it)
         }
     }
@@ -101,7 +102,7 @@ class LegoSetsFragment : DaggerFragment(){
         // If a layout manager has already been set, get current scroll position.
         if (recyclerView.layoutManager != null) {
             scrollPosition = (recyclerView.layoutManager as LinearLayoutManager)
-                    .findFirstCompletelyVisibleItemPosition()
+                .findFirstCompletelyVisibleItemPosition()
         }
 
         if (isLinearLayoutManager) {
@@ -118,8 +119,10 @@ class LegoSetsFragment : DaggerFragment(){
     }
 
     private fun setDataRepresentationIcon(item: MenuItem) {
-        item.setIcon(if (isLinearLayoutManager)
-            R.drawable.ic_grid_list_24dp else R.drawable.ic_list_white_24dp)
+        item.setIcon(
+            if (isLinearLayoutManager)
+                R.drawable.ic_grid_list_24dp else R.drawable.ic_list_white_24dp
+        )
     }
 
     companion object {

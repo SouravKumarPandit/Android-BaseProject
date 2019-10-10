@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.vrlocal.android.baseproject.ui.widgets.home.MainActivity"
+        tools:context="com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity"
         tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
