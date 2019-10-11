@@ -21,7 +21,7 @@ buildscript {
         materialVersion = '1.0.0'
         navigationVersion = '2.1.0'
         recyclerViewVersion = '1.1.0-beta04'
-        roomVersion = '2.2.0-rc01'
+        roomVersion = '2.2.0'
         workVersion = '2.2.0'
         pagingVersion = '2.1.0'
         gsonVersion = '2.8.6'
