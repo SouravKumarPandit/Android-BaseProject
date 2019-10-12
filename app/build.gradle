@@ -23,7 +23,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -80,8 +80,8 @@ dependencies {
 
     // Tools
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
-    implementation "com.facebook.stetho:stetho:$rootProject.stetho"
-    implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho"
+//    implementation "com.facebook.stetho:stetho:$rootProject.stetho"
+//    implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho"
 
     // Dagger
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
@@ -142,8 +142,12 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics:$fire_analytics_version"
 
 
-    def crashlytic_version='2.10.1'
-    implementation "com.crashlytics.sdk.android:crashlytics:$crashlytic_version"
+    def crashlytic_version='2.10.1@aar'
+//    implementation "com.crashlytics.sdk.android:crashlytics:$crashlytic_version"
+
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlytic_version") {
+        transitive = true;
+    }
 
 
 }

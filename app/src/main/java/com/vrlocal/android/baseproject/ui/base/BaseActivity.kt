@@ -16,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.api.session.SessionManager
@@ -23,7 +24,10 @@ import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.widgets.login.data.User
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import dagger.android.support.DaggerAppCompatActivity
+import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
+
+
 
 
 @SuppressLint("Registered")
@@ -126,7 +130,8 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        subscribeObservers()
+        Fabric.with(this, Crashlytics())
+//        subscribeObservers()
     }
 
     private fun subscribeObservers() {

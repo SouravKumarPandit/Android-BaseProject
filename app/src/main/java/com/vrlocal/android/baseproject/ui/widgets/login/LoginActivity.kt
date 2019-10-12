@@ -41,8 +41,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
 
         })
 
-        btnNetwork.setOnClickListener(View.OnClickListener {
-            _->
+        btnNetwork.setOnClickListener(View.OnClickListener { _ ->
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener
@@ -50,8 +49,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             baseViewModel.networkUser(userNumber)
                 .observe(this, Observer { result -> VResultHandler(this, result) })
         })
-        btnDatabase.setOnClickListener(View.OnClickListener {
-                _->
+        btnDatabase.setOnClickListener(View.OnClickListener { _ ->
 
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
@@ -60,11 +58,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             baseViewModel.cacheUser(userNumber)
                 .observe(this, Observer { result -> VResultHandler(this, result) })
 
-            navHomeActivity();
+//            navHomeActivity();
 
+//            for testing crashlatics
+//            Crashlytics.getInstance().crash()
 
         })
-
 
 
     }

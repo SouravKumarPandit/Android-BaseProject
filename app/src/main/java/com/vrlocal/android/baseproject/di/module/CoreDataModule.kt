@@ -1,6 +1,5 @@
 package com.vrlocal.android.baseproject.di.module
 
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.vrlocal.android.baseproject.BuildConfig
 import dagger.Module
@@ -21,7 +20,7 @@ class CoreDataModule {
     @Provides
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
             OkHttpClient.Builder().addInterceptor(interceptor)
-                    .addNetworkInterceptor(StethoInterceptor())
+//                    .addNetworkInterceptor(StethoInterceptor())
                     .build()
 
     @Provides

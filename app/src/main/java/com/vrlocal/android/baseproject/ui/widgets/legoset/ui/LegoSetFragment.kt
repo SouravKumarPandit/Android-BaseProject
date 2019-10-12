@@ -6,9 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.binding.bindImageFromUrl
+import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegoSetBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
@@ -71,10 +72,10 @@ class LegoSetFragment : BaseFragment() {
     }
 
     private fun subscribeUi(binding: FragmentLegoSetBinding) {
-        viewModel.legoSet.observe(viewLifecycleOwner, Observer { result ->
+    /*    viewModel.legoSet.observe(viewLifecycleOwner, Observer { result ->
             VResultHandler(this, result)
 
-        })/*
+        })*/
         viewModel.legoSet.observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 VResult.Status.SUCCESS -> {
@@ -92,7 +93,7 @@ class LegoSetFragment : BaseFragment() {
                 VResult.Status.AUTHENTICATED -> {
                 }
             }
-        })*/
+        })
     }
 
     private fun bindView(binding: FragmentLegoSetBinding, legoSet: LegoSet) {
