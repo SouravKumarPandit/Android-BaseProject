@@ -1,5 +1,6 @@
 package com.vrlocal.android.baseproject.ui.widgets.login.data
 
+import androidx.room.Embedded
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -21,7 +22,8 @@ class Address {
     @field:SerializedName("zipcode")
     @Expose
     var zipcode: String? = null
-    
+
+    @Embedded(prefix = "geo_")
     @field:SerializedName("geo")
     @Expose
     var geo: Geo? = null

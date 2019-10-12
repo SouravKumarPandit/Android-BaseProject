@@ -4,19 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.api.VResultHandler
-import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.ActivityLoginBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.widgets.home.MainActivity
 import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.ui.widgets.login.data.UserDao
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 
-
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILoginView {
 
+
+    @Inject
+    lateinit var userDao: UserDao
 
     @Inject
     override lateinit var baseViewModel: LoginViewModel;
@@ -24,30 +27,54 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.bindView(com.vrlocal.android.baseproject.R.layout.activity_login)
+        this.bindView(R.layout.activity_login)
         baseViewModel.attachView(this)
 
-
-        btnLogin.setOnClickListener(View.OnClickListener { _ ->
-            //            baseViewModel.authenticateUser
+        btnCacheNetwork.setOnClickListener(View.OnClickListener { _ ->
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener
-//            Crashlytics.getInstance().crash()
-//            val userNumber = edtUserId.text.toString()
-            baseViewModel.authenticateUser(userNumber.toInt()).removeObservers(this)
-            baseViewModel.authenticateUser(userNumber.toInt())
-                .observe(this, Observer { result: VResult<User> ->
-                    VResultHandler(
-                        this,
-                        result
-                    )
-                })
+//            baseViewModel.userId = userNumber
+            baseViewModel.cacheOrNetwork(userNumber).removeObservers(this)
+            baseViewModel.cacheOrNetwork(userNumber)
+                .observe(this, Observer { result -> VResultHandler(this, result) })
+
+        })
+
+        btnNetwork.setOnClickListener(View.OnClickListener {
+            _->
+            val userNumber = edtUserId.text.toString()
+            if (userNumber.isEmpty())
+                return@OnClickListener
+            baseViewModel.networkUser(userNumber).removeObservers(this)
+            baseViewModel.networkUser(userNumber)
+                .observe(this, Observer { result -> VResultHandler(this, result) })
+        })
+        btnDatabase.setOnClickListener(View.OnClickListener {
+                _->
+
+            val userNumber = edtUserId.text.toString()
+            if (userNumber.isEmpty())
+                return@OnClickListener
+            baseViewModel.cacheUser(userNumber).removeObservers(this)
+            baseViewModel.cacheUser(userNumber)
+                .observe(this, Observer { result -> VResultHandler(this, result) })
+
+            navHomeActivity();
 
 
         })
 
 
+
+    }
+
+    private fun navHomeActivity() {
+
+        val intent = Intent(this, MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+//        finishAffinity()
     }
 
     private fun subscribeUi(
@@ -62,8 +89,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
     override fun onResponse(responseObject: Any?) {
         super.onResponse(responseObject)
         if (responseObject is User) {
-            showSnackBar("response $responseObject", 0)
             subscribeUi(dataBinding, responseObject)
+            showSnackBar(message = responseObject.name, statusColor = 0)
 
         }
     }
@@ -71,13 +98,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
 
     override fun showError(error: String) {
         super.showError(error)
-        val intent = Intent(this,MainActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-//        finishAffinity()
-//        startHomeActivity()
-
-        startActivity(intent)
     }
 
 

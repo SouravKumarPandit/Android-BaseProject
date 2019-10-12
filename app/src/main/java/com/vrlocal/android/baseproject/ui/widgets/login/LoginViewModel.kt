@@ -9,7 +9,20 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val repository: LoginRepository) :
     BaseViewModel<ILoginView>() {
-    fun authenticateUser(userId: Int): LiveData<VResult<User>> =
-        repository.authenticateUser("$userId")
+
+
+//    @Inject
+//    override lateinit var sessionManager: SessionManager
+
+    lateinit var user: User;
+
+    fun cacheOrNetwork(userId: String): LiveData<VResult<User>> =
+        repository.cacheOrNetworkUser(userId)
+
+
+    fun cacheUser(userId: String): LiveData<VResult<User>> =
+        repository.authenticateDatabaseUser(userId)
+    fun networkUser(userId: String): LiveData<VResult<User>> =
+        repository.authenticateNetworkUser(userId)
 
 }

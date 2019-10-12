@@ -1,5 +1,6 @@
 package com.vrlocal.android.baseproject.ui.widgets.legoset.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
@@ -9,13 +10,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.R
+import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegosetsBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.GridSpacingItemDecoration
 import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import com.vrlocal.android.baseproject.ui.setTitle
+import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
+import com.vrlocal.android.baseproject.ui.widgets.login.data.UserDao
 import com.vrlocal.android.baseproject.util.ConnectivityUtil
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import javax.inject.Inject
 
 class LegoSetsFragment : BaseFragment() {
@@ -23,7 +29,8 @@ class LegoSetsFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: LegoSetsViewModel
-
+    @Inject
+    lateinit var userDao: UserDao;
     private val args: LegoSetsFragmentArgs by navArgs()
 
     private lateinit var binding: FragmentLegosetsBinding
@@ -82,8 +89,31 @@ class LegoSetsFragment : BaseFragment() {
                 setLayoutManager()
                 true
             }
+            R.id.logout->{
+                viewModel.logoutUser.removeObservers(viewLifecycleOwner)
+                viewModel.logoutUser.observe(viewLifecycleOwner){
+                    if (it.status==VResult.Status.SUCCESS){
+                        GlobalScope.async {
+                            userDao.removeUser(it.data!!)
+                        }
+                        navigateLoginScreen()
+
+                    }
+                }
+
+                return  true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun navigateLoginScreen() {
+
+        val intent = Intent(activity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+//        finishAffinity()
+
     }
 
     private fun subscribeUi(adapter: LegoSetAdapter) {

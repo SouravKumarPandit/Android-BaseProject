@@ -30,7 +30,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(){
 
         this.bindView(R.layout.activity_main)
         drawerLayout = dataBinding.drawerLayout
-//        baseViewModel.attachView(this)
 
         navController = findNavController(R.id.nav_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)

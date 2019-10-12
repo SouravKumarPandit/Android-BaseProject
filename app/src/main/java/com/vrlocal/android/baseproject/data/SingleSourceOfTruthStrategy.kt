@@ -34,17 +34,24 @@ fun <T, A> resultLiveData(
         }
     }
 
+fun <T> databaseLiveData(databaseQuery: () -> LiveData<T>): LiveData<VResult<T>> =
+    liveData(Dispatchers.IO) {
+        emit(VResult.loading<T>())
+        val source = databaseQuery.invoke().map {
+            VResult.success(it)
+        }
+        emitSource(source)
+    }
+
+
 fun <A> networkLiveData(networkCall: suspend () -> VResult<A>): LiveData<VResult<A>> =
     liveData(Dispatchers.IO) {
         emit(VResult.loading<A>())
 
         val responseStatus = networkCall.invoke()
         if (responseStatus.status == SUCCESS) {
-//            saveCallResult(responseStatus.data!!)
             emit(VResult.success<A>(responseStatus.data!!))
-//            print(responseStatus.message)
         } else if (responseStatus.status == ERROR) {
-//            print(responseStatus.message)
             emit(VResult.error<A>(responseStatus.message!!))
         }
     }

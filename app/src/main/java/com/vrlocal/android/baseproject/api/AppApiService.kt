@@ -13,9 +13,6 @@ import retrofit2.http.Query
  */
 interface AppApiService {
 
-    companion object {
-        const val ENDPOINT = "https://rebrickable.com/api/v3/"
-    }
 
     @GET("lego/themes/")
     suspend fun getThemes(@Query("page") page: Int? = null,

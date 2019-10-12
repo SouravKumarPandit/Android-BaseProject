@@ -12,14 +12,16 @@ import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSetDao
 import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoTheme
 import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoThemeDao
-import com.vrlocal.android.baseproject.util.Constants
+import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.ui.widgets.login.data.UserDao
+import com.vrlocal.android.baseproject.util.VConstants
 import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 
 /**
  * The Room database for this app
  */
 @Database(entities = [LegoTheme::class,
-    LegoSet::class],
+    LegoSet::class,(User::class)],
         version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
     abstract class AppDatabase : RoomDatabase() {
@@ -28,7 +30,7 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 
     abstract fun legoThemeDao(): LegoThemeDao
 
-//    abstract fun userDao(): UserDao
+    abstract fun userDao(): UserDao
 
 
 
@@ -48,7 +50,7 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
         // Create and pre-populate the database. See this article for more details:
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
+            return Room.databaseBuilder(context, AppDatabase::class.java, VConstants.DATABASE_NAME)
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

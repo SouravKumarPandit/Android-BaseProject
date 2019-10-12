@@ -1,21 +1,20 @@
+package com.vrlocal.android.baseproject.ui.widgets.login.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import androidx.room.*
 
-//@Dao
+@Dao
 interface UserDao {
-    @Query("SELECT * FROM user")
-    fun getUser(): LiveData<User>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: User)
+    suspend fun upsert(user: User)
 
-//    @Delete
-//    suspend fun removeUser(user: User)
+    @Query("SELECT * FROM current_user")
+    fun getCurrentUser(): LiveData<User>
+
+    @Delete
+    suspend fun removeUser(user: User)
 
 
 }

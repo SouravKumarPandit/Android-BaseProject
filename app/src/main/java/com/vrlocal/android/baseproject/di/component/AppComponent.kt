@@ -2,6 +2,7 @@ package com.vrlocal.android.baseproject.di.component
 
 import android.app.Application
 import com.vrlocal.android.baseproject.BaseApplication
+import com.vrlocal.android.baseproject.api.session.SessionManager
 import com.vrlocal.android.baseproject.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
@@ -20,7 +21,7 @@ import javax.inject.Singleton
 
 interface AppComponent : AndroidInjector<BaseApplication> {
 
-
+    fun sessionManager(): SessionManager
     @Component.Builder
     interface Builder {
 

@@ -1,13 +1,19 @@
 package com.vrlocal.android.baseproject.api.session
 
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
+import com.vrlocal.android.baseproject.data.VResult
+import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.util.VConstants
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SessionManager @Inject
 constructor() {
-/*
 
     // data
     private val cachedUser = MediatorLiveData<VResult<User>>()
@@ -15,29 +21,30 @@ constructor() {
 
 
     fun authenticateWithId(source: LiveData<VResult<User>>) {
-        if (cachedUser != null) {
-            cachedUser.setValue(VResult.loading(null as User?))
+        cachedUser.setValue(VResult.loading(null as User?))
 
-            cachedUser.addSource(source, Observer<VResult<User>> { userAuthResource ->
-                cachedUser.setValue(userAuthResource)
-                cachedUser.removeSource(source)
+        cachedUser.addSource(source, Observer<VResult<User>> { vResult ->
+            cachedUser.value = vResult
+            cachedUser.removeSource(source)
 
-                if (userAuthResource.status.equals(VResult.Status.ERROR)) {
-                    cachedUser.setValue(VResult.logout())
-                }
-            })
-        }
+            if (vResult.status == VResult.Status.ERROR) {
+                cachedUser.value = VResult.logout()
+            }
+        })
     }
 
+   /* fun authenticateUser(email: String,password:String){
+//        todo
+    }*/
+//        networkLiveData(networkCall = {});
     fun logOut() {
-        Log.d(Constants.APP_TAG, "logOut: logging out...")
-        cachedUser.setValue(VResult.logout())
+        Log.d(VConstants.APP_TAG, "logOut: logging out...")
+        cachedUser.value = VResult.logout()
     }
 
-    fun getAuthUser(): LiveData<VResult<User>> {
+    fun getLogeInUser(): LiveData<VResult<User>> {
         return cachedUser
     }
-*/
 
 
 }

@@ -9,13 +9,13 @@ import com.vrlocal.android.baseproject.di.CoroutineScropeIO
 import com.vrlocal.android.baseproject.di.LegoAPI
 import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSetRemoteDataSource
 import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoThemeRemoteDataSource
+import com.vrlocal.android.baseproject.util.VConstants
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -70,9 +70,9 @@ class AppModule {
     @Provides
     fun provideLegoThemeDao(db: AppDatabase) = db.legoThemeDao()
 
-//    @Singleton
-//    @Provides
-//    fun provideUserDao(db: AppDatabase) = db.userDao()
+    @Singleton
+    @Provides
+    fun provideUserDao(db: AppDatabase) = db.userDao()
 
     @CoroutineScropeIO
     @Provides
@@ -85,10 +85,10 @@ class AppModule {
     ): Retrofit {
 
         return Retrofit.Builder()
-            .baseUrl(AppApiService .ENDPOINT)
-//            .baseUrl(Constants.BASE_URL)
+//            .baseUrl(VConstants.ENDPOINT)
+            .baseUrl(VConstants.BASE_URL)
             .client(okhttpClient)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(converterFactory)
             .build()
     }

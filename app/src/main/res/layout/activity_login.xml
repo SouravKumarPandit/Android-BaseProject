@@ -5,9 +5,9 @@
 
     <data>
 
-<!--        <variable-->
-<!--            name="vbindutils"-->
-<!--            type="com.vrlocal.android.baseproject.binding.BindUtils" />-->
+        <!--        <variable-->
+        <!--            name="vbindutils"-->
+        <!--            type="com.vrlocal.android.baseproject.binding.BindUtils" />-->
         <variable
             name="user"
             type="com.vrlocal.android.baseproject.ui.widgets.login.data.User" />
@@ -27,16 +27,9 @@
             android:padding="35dp"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <ImageView
-                android:id="@+id/login_logo"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputEditText
+
                 android:id="@+id/edtUserId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,58 +37,97 @@
                 android:hint="User id"
                 android:text="5"
                 android:textColor="#000"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login_logo" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_editor_absoluteX="0dp"
+                app:layout_editor_absoluteY="0dp" />
 
-            <Button
-                android:id="@+id/btnLogin"
+            <LinearLayout
+                android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Request Network"
+                android:orientation="vertical"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtUserId" />
+                app:layout_constraintTop_toBottomOf="@+id/edtUserId">
+
+                <Button
+                    android:id="@+id/btnCacheNetwork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="cache or network"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtUserId" />
+
+                <Button
+                    android:id="@+id/btnNetwork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Request Ntwrork"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtUserId" />
+
+
+                <Button
+                    android:id="@+id/btnDatabase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Request Database"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtUserId" />
+
+
+            </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnLogin"
-                >
+                app:layout_constraintTop_toBottomOf="@id/buttonLayout">
+
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{user.name}"/>
+                    android:text="@{user.name}" />
+
                 <TextView
                     android:id="@+id/txtEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{user.email}"/>
+                    android:text="@{user.email}" />
+
                 <TextView
                     android:id="@+id/txtAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{user.address.toString()}"/>
+                    android:text="@{user.address.city}" />
+
                 <TextView
                     android:id="@+id/txtCompany"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{user.company.toString()}"/>
+                    android:text="@{user.company.name}" />
 
             </LinearLayout>
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

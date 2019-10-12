@@ -14,4 +14,6 @@ class LegoSetRemoteDataSource @Inject constructor(private val service: AppApiSer
 
     suspend fun fetchSet(id: String)
             = getResult { service.getSet(id) }
+
+    suspend fun logoutUser()=getResult { service.getUser("5") }
 }

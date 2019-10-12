@@ -4,8 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-
-
+import android.widget.Toast
 
 
 class AppExceptionHandler(val systemHandler: Thread.UncaughtExceptionHandler,
@@ -77,6 +76,7 @@ class AppExceptionHandler(val systemHandler: Thread.UncaughtExceptionHandler,
                                   
             val lastException = activity.intent
                                   .getSerializableExtra(LAST_EXCEPTION) as Throwable?
+            Toast.makeText(activity,"Exception occurred,",Toast.LENGTH_SHORT).show()
 
 
             if (!isRestarted || !isSameException(e, lastException)) {

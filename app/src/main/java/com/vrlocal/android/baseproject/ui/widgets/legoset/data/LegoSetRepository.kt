@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.vrlocal.android.baseproject.data.networkLiveData
 import com.vrlocal.android.baseproject.data.resultLiveData
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
@@ -49,6 +50,9 @@ class LegoSetRepository @Inject constructor(private val dao: LegoSetDao,
             networkCall = { legoSetRemoteDataSource.fetchSets(1, PAGE_SIZE, themeId) },
             saveCallResult = { dao.insertAll(it.results) })
 
+    fun logoutUser() = networkLiveData(
+        networkCall = { legoSetRemoteDataSource.logoutUser() }
+        )
     companion object {
 
         const val PAGE_SIZE = 100

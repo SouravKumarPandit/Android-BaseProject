@@ -1,13 +1,16 @@
 package com.vrlocal.android.baseproject.ui.widgets.login.data
 
+import androidx.room.Embedded
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
-//@Entity(tableName = "user")
+@Entity(tableName = "current_user")
 data class User (
 
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = false)
     @field:SerializedName("id")
     var id: Int,
     @field:SerializedName("name")
@@ -20,10 +23,17 @@ data class User (
     var phone: String,
     @field:SerializedName("website")
     var website: String?=null,
+    @Embedded(prefix = "company_")
     @field:SerializedName("company")
     var company: Company? = null,
+
+    @Embedded(prefix = "address_")
     @field:SerializedName("address")
     var address: Address? = null
 ){
-    override fun toString() = name
+
+//    @PrimaryKey(autoGenerate = false)
+//    @field:SerializedName("userId")
+//    var userId:Int= VConstants.CURRENT_USER_CONST;
+
 }

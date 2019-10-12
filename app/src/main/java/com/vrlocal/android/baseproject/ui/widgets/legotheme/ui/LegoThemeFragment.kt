@@ -12,7 +12,6 @@ import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentThemesBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
-import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import javax.inject.Inject
 
@@ -47,14 +46,15 @@ class LegoThemeFragment : BaseFragment() {
         viewModel.legoThemes.observe(viewLifecycleOwner, Observer { result ->
             when (result.status) {
                 VResult.Status.SUCCESS -> {
-                    (activity as BaseActivity<*, *>).hideProgressBar()
+                    hideProgressBar()
                     result.data?.let { adapter.submitList(it) }
                 }
                 VResult.Status.LOADING -> {
-                    (activity as BaseActivity<*, *>).showProgressBar()
+                    showProgressBar()
+
                 }
                 VResult.Status.ERROR -> {
-                    (activity as BaseActivity<*, *>).hideProgressBar()
+                    hideProgressBar()
                     result.message?.let { showError(it) }
 
 

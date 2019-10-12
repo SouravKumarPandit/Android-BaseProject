@@ -135,8 +135,8 @@ dependencies {
     def rxjava_version = '2.2.6'
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
     // Rx-Retrofit Call Adapter
-    def rxcalladapter_version = '2.6.2'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version"
+//    def rxcalladapter_version = '2.6.2'
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version"
 
     def fire_analytics_version='17.2.0'
     implementation "com.google.firebase:firebase-analytics:$fire_analytics_version"

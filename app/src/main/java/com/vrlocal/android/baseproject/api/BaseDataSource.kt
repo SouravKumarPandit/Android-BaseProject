@@ -9,6 +9,7 @@ import timber.log.Timber
  */
 abstract class BaseDataSource {
 
+
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): VResult<T> {
         try {
             val response = call()
@@ -24,7 +25,7 @@ abstract class BaseDataSource {
 
     private fun <T> error(message: String): VResult<T> {
         Timber.e(message)
-        return VResult.error("Aw, Snap! found an error")
+        return VResult.error("Aw, Snap! found an error${message}")
     }
 
 }

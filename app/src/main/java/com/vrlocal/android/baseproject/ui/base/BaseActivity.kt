@@ -1,8 +1,11 @@
 package com.vrlocal.android.baseproject.ui.base
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +15,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
+import com.vrlocal.android.baseproject.api.VResultHandler
+import com.vrlocal.android.baseproject.api.session.SessionManager
+import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
+import com.vrlocal.android.baseproject.ui.widgets.login.data.User
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 
 @SuppressLint("Registered")
 open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     DaggerAppCompatActivity(), IView {
-
+    private var doubleBackToExitPressedOnce = false
     open lateinit var dataBinding: B
     open lateinit var baseViewModel: T
 
@@ -30,6 +39,10 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         dataBinding = DataBindingUtil.setContentView(this, layoutId)
     }
 
+
+    @Inject
+    public lateinit var sessionManager: SessionManager
+
     override fun setContentView(layoutResID: Int) {
 
         val constraintLayout: ConstraintLayout =
@@ -38,8 +51,6 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         val initFrame = initFrame()
         constraintLayout.addView(initFrame)
         super.setContentView(constraintLayout)
-//        showProgressBar()
-
 
     }
 
@@ -48,7 +59,6 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         super.setContentView(view)
-//        showProgressBar()
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
@@ -59,6 +69,7 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         showProgressBar()
 
     }
+
 
     override fun onDestroy() {
         baseViewModel.detachView()
@@ -91,14 +102,63 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     override fun onBackPressed() {
 
         if (mProgressBar.isVisible) {
-            /*todo close network connection here*/
             hideProgressBar()
             return;
         }
 
+        if (this is LoginActivity) {
+
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+
+            this.doubleBackToExitPressedOnce = true
+//        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+            showSnackBar("press again to exit", 0)
+
+            Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+
+
+        }else
         super.onBackPressed()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+        sessionManager.getLogeInUser().observe(this, Observer { userAuthResource ->
+            VResultHandler(
+                this,
+                userAuthResource
+            )
+        })/* sessionManager.getLogeInUser().observe(this, Observer { userAuthResource ->
+            if (userAuthResource != null) {
+                when (userAuthResource.status) {
+                    VResult.Status.LOADING -> {
+                    }
+                    VResult.Status.AUTHENTICATED -> {
+                    }
+                    VResult.Status.ERROR -> {
+                    }
+
+                    VResult.Status.NOT_AUTHENTICATED -> {
+                        navLoginScreen()
+                    }
+                    VResult.Status.SUCCESS -> TODO()
+                }
+            }
+        })*/
+    }
+
+    private fun navLoginScreen() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
+    }
 
     private fun getConstraintLayout(): ConstraintLayout {
         val constraintLayout = ConstraintLayout(this)
@@ -138,10 +198,13 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
 
     override fun onResponse(responseObject: Any?) {
+        if (responseObject is User) {
+            sessionManager.getLogeInUser()
+        }
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this,message+"",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message + "", Toast.LENGTH_SHORT).show()
     }
 
     override fun showSnackBar(message: String, statusColor: Int) {
