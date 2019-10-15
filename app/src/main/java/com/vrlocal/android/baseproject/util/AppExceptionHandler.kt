@@ -59,7 +59,7 @@ class AppExceptionHandler(val systemHandler: Thread.UncaughtExceptionHandler,
     }
 
 
-    override fun uncaughtException(t: Thread?, e: Throwable) {
+    override fun uncaughtException(t: Thread, e: Throwable) {
 //        Log.e(e)
 
         lastStartedActivity?.let { activity ->

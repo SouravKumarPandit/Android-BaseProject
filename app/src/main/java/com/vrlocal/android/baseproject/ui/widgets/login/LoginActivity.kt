@@ -54,8 +54,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener
-            baseViewModel.cacheUser(userNumber).removeObservers(this)
-            baseViewModel.cacheUser(userNumber)
+            baseViewModel.cacheUser().removeObservers(this)
+            baseViewModel.cacheUser()
                 .observe(this, Observer { result -> VResultHandler(this, result) })
 
 //            navHomeActivity();

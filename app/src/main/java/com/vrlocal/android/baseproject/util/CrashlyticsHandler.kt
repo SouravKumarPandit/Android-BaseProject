@@ -10,7 +10,7 @@ class CrashlyticsHandler(private val defaultUncaughtExceptionHandler: Thread.Unc
     @Inject
     lateinit var context: ActivityCompat
 
-    override fun uncaughtException(thread: Thread?, ex: Throwable?) {
+    override fun uncaughtException(thread: Thread, ex: Throwable) {
         // Our custom logic goes here. For example calculate the memory heap
         val maxMemory = runtime.maxMemory()
         val freeMemory = runtime.freeMemory()

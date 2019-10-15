@@ -20,8 +20,8 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
         repository.cacheOrNetworkUser(userId)
 
 
-    fun cacheUser(userId: String): LiveData<VResult<User>> =
-        repository.authenticateDatabaseUser(userId)
+    fun cacheUser(): LiveData<VResult<User>> =
+        repository.authenticateDatabaseUser()
     fun networkUser(userId: String): LiveData<VResult<User>> =
         repository.authenticateNetworkUser(userId)
 

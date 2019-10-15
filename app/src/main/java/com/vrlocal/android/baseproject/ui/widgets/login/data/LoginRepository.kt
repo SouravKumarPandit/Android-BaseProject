@@ -27,7 +27,7 @@ class LoginRepository @Inject constructor(
             remoteSource.authenticateUser(id)
         }).distinctUntilChanged()
 
-    fun authenticateDatabaseUser(id: String) = databaseLiveData(
+    fun authenticateDatabaseUser() = databaseLiveData(
         databaseQuery = {
             dao.getCurrentUser()
         }).distinctUntilChanged()
