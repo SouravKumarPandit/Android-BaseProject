@@ -13,15 +13,12 @@ import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegosetsBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
-import com.vrlocal.android.baseproject.ui.GridSpacingItemDecoration
-import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
-import com.vrlocal.android.baseproject.ui.setTitle
+import com.vrlocal.android.baseproject.ui.common.GridSpacingItemDecoration
+import com.vrlocal.android.baseproject.ui.common.VerticalItemDecoration
 import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.widgets.login.data.UserDao
 import com.vrlocal.android.baseproject.util.ConnectivityUtil
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import javax.inject.Inject
 
 class LegoSetsFragment : BaseFragment() {
@@ -30,7 +27,7 @@ class LegoSetsFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: LegoSetsViewModel
     @Inject
-    lateinit var userDao: UserDao;
+    lateinit var userDao: UserDao
     private val args: LegoSetsFragmentArgs by navArgs()
 
     private lateinit var binding: FragmentLegosetsBinding
@@ -93,9 +90,9 @@ class LegoSetsFragment : BaseFragment() {
                 viewModel.logoutUser.removeObservers(viewLifecycleOwner)
                 viewModel.logoutUser.observe(viewLifecycleOwner){
                     if (it.status==VResult.Status.SUCCESS){
-                        GlobalScope.async {
-                            userDao.removeUser(it.data!!)
-                        }
+//                        GlobalScope.async {
+//                            userDao.removeUser(it.data!!)
+//                        }
                         navigateLoginScreen()
 
                     }

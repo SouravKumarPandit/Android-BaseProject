@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable
 
 object  ViewUtils{
     fun getGradientDrawable(color1: Int, color2: Int):Drawable{
-        val gradDrawable:GradientDrawable= GradientDrawable()
+        val gradDrawable = GradientDrawable()
         gradDrawable.colors= intArrayOf(color1,color2)
 //        gradDrawable.cornerRadius=8f
 //        gradDrawable.setPadding(5,5,5,5)

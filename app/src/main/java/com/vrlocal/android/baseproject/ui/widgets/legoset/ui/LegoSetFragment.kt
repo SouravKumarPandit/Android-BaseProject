@@ -13,7 +13,6 @@ import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegoSetBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
-import com.vrlocal.android.baseproject.ui.setTitle
 import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.util.intentOpenWebsite
 import com.vrlocal.android.baseproject.util.intentShareText

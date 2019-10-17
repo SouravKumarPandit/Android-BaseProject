@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui
+package com.vrlocal.android.baseproject.ui.common
 
 import android.graphics.Rect
 import android.view.View

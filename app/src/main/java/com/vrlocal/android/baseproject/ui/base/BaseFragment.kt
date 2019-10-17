@@ -6,17 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import dagger.android.support.DaggerFragment
 
-open class BaseFragment :DaggerFragment() ,IView{
+open class BaseFragment : DaggerFragment(), IView {
 
 
-    lateinit var fragmentView:View
+    lateinit var fragmentView: View
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentView=view
+        fragmentView = view
 
     }
 
@@ -52,13 +54,12 @@ open class BaseFragment :DaggerFragment() ,IView{
     }
 
     override fun onResponse(responseObject: Any?) {
-        showSnackBar(responseObject.toString(),0)
+        showSnackBar(responseObject.toString(), 0)
     }
 
     override fun showToast(message: String) {
 
-        Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
-//        Snackbar.make(fragmentView,"Error : $message",Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showSnackBar(message: String, statusColor: Int) {
@@ -72,16 +73,20 @@ open class BaseFragment :DaggerFragment() ,IView{
         viewGroup.background =
             ViewUtils.getGradientDrawable(Color.parseColor("#72A325"), Color.parseColor("#91C22B"))
         val textView = (viewGroup.getChildAt(0) as ViewGroup).getChildAt(0) as TextView
-//        textView.isSingleLine=true
+        textView.isSingleLine = false
         textView.setTextColor(
             Color.WHITE
         )
-//        snackBar.setAction("OK") {
-//            snackBar.dismiss()
-//        }
+        snackBar.setAction("OK") {
+            snackBar.dismiss()
+        }
         snackBar.setActionTextColor(Color.WHITE)
         snackBar.show()
 
+    }
+
+    fun Fragment.setTitle(title: String) {
+        (activity as AppCompatActivity).supportActionBar!!.title = title
     }
 
 

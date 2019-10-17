@@ -11,7 +11,7 @@ import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentThemesBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
-import com.vrlocal.android.baseproject.ui.VerticalItemDecoration
+import com.vrlocal.android.baseproject.ui.common.VerticalItemDecoration
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
 import javax.inject.Inject
 
@@ -32,7 +32,12 @@ class LegoThemeFragment : BaseFragment() {
 
         val adapter = LegoThemeAdapter()
         binding.recyclerView.addItemDecoration(
-                VerticalItemDecoration(resources.getDimension(R.dimen.margin_normal).toInt(), true) )
+            VerticalItemDecoration(
+                resources.getDimension(
+                    R.dimen.margin_normal
+                ).toInt(), true
+            )
+        )
         binding.recyclerView.adapter = adapter
 
         subscribeUi(binding, adapter)
