@@ -1,9 +1,9 @@
 package com.vrlocal.android.baseproject
 
 import com.crashlytics.android.Crashlytics
+import com.vrlocal.android.baseproject.di.DaggerApplication
 import com.vrlocal.android.baseproject.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
 import io.fabric.sdk.android.Fabric
 
 class BaseApplication : DaggerApplication() {
