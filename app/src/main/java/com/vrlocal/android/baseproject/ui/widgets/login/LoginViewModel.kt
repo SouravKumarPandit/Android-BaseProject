@@ -24,5 +24,6 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
         repository.authenticateDatabaseUser()
     fun networkUser(userId: String): LiveData<VResult<User>> =
         repository.authenticateNetworkUser(userId)
+    fun deleteUser():LiveData <VResult<User>> =        repository.authenticateNetworkUser()
 
 }

@@ -21,7 +21,7 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
  * The Room database for this app
  */
 @Database(entities = [LegoTheme::class,
-    LegoSet::class,(User::class)],
+    LegoSet::class,User::class],
         version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
     abstract class AppDatabase : RoomDatabase() {

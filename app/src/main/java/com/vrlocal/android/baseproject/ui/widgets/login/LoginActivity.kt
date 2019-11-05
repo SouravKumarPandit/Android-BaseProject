@@ -64,7 +64,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
 //            Crashlytics.getInstance().crash()
 
         })
+        btnDeleteData.setOnClickListener(View.OnClickListener { _ ->
 
+//            val userNumber = edtUserId.text.toString()
+//            if (userNumber.isEmpty())
+//                return@OnClickListener
+//            baseViewModel.cacheUser().removeObservers(this)
+//            baseViewModel.cacheUser()
+//                .observe(this, Observer { result -> VResultHandler(this, result) })
+
+//            navHomeActivity();
+
+//            for testing crashlatics
+//            Crashlytics.getInstance().crash()
+
+        })
 
     }
 

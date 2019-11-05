@@ -14,7 +14,7 @@ interface UserDao {
     fun getCurrentUser(): LiveData<User>
 
     @Delete
-    suspend fun removeUser(user: User)
+    suspend fun removeUser()
 
 
 }

@@ -30,10 +30,4 @@ data class User (
     @Embedded(prefix = "address_")
     @field:SerializedName("address")
     var address: Address? = null
-){
-
-//    @PrimaryKey(autoGenerate = false)
-//    @field:SerializedName("userId")
-//    var userId:Int= VConstants.CURRENT_USER_CONST;
-
-}
+)
