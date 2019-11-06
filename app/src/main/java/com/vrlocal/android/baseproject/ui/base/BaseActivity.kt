@@ -15,10 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
-import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.api.session.SessionManager
 import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.widgets.login.data.User
@@ -135,12 +133,8 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     private fun subscribeObservers() {
-        sessionManager.getLogeInUser().observe(this, Observer { userAuthResource ->
-            VResultHandler(
-                this,
-                userAuthResource
-            )
-        })/* sessionManager.getLogeInUser().observe(this, Observer { userAuthResource ->
+
+        /* sessionManager.getLogeInUser().observe(this, Observer { userAuthResource ->
             if (userAuthResource != null) {
                 when (userAuthResource.status) {
                     VResult.Status.LOADING -> {

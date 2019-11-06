@@ -34,11 +34,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener
-//            baseViewModel.userId = userNumber
             baseViewModel.cacheOrNetwork(userNumber).removeObservers(this)
-            baseViewModel.cacheOrNetwork(userNumber)
-                .observe(this, Observer { result -> VResultHandler(this, result) })
-
+            baseViewModel.cacheOrNetwork(userNumber).observe(
+                this,
+                Observer { result ->
+                    VResultHandler(
+                        this,
+                        result
+                    ) { authenticateUser(result.data) }
+                })
         })
 
         btnNetwork.setOnClickListener(View.OnClickListener { _ ->
@@ -47,39 +51,42 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
                 return@OnClickListener
             baseViewModel.networkUser(userNumber).removeObservers(this)
             baseViewModel.networkUser(userNumber)
-                .observe(this, Observer { result -> VResultHandler(this, result) })
+                .observe(
+                    this,
+                    Observer { result -> VResultHandler(this, result) { logoutUser(result.data) } })
         })
         btnDatabase.setOnClickListener(View.OnClickListener { _ ->
-
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener
             baseViewModel.cacheUser().removeObservers(this)
             baseViewModel.cacheUser()
-                .observe(this, Observer { result -> VResultHandler(this, result) })
-
-//            navHomeActivity();
-
-//            for testing crashlatics
-//            Crashlytics.getInstance().crash()
-
+                .observe(
+                    this,
+                    Observer { result -> VResultHandler(this, result) { loginUser(result.data) } })
         })
         btnDeleteData.setOnClickListener(View.OnClickListener { _ ->
 
-//            val userNumber = edtUserId.text.toString()
-//            if (userNumber.isEmpty())
-//                return@OnClickListener
-//            baseViewModel.cacheUser().removeObservers(this)
-//            baseViewModel.cacheUser()
-//                .observe(this, Observer { result -> VResultHandler(this, result) })
+            val userNumber = edtUserId.text.toString()
+            if (userNumber.isEmpty())
+                return@OnClickListener
+            baseViewModel.deleteUser().observe(this, Observer { _ ->
+                txtName.text = ""
+                txtEmail.text = ""
+                txtAddress.text = ""
+                txtCompany.text = ""
 
-//            navHomeActivity();
-
-//            for testing crashlatics
-//            Crashlytics.getInstance().crash()
+            })
 
         })
 
+        btnClearText.setOnClickListener(View.OnClickListener { _ ->
+            txtName.text = ""
+            txtEmail.text = ""
+            txtAddress.text = ""
+            txtCompany.text = ""
+
+        })
     }
 
     private fun navHomeActivity() {
@@ -93,7 +100,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
     private fun subscribeUi(
         binding: ActivityLoginBinding,
         responseObject
-        : User
+        : User?
     ) {
         binding.user = responseObject
 
@@ -113,16 +120,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
         super.showError(error)
     }
 
+    override fun authenticateUser(authenticatedUser: User?) {
+        showToast("user authentication method ${authenticatedUser?.email}")
+        subscribeUi(dataBinding, authenticatedUser)
+    }
 
-    override fun loginUser(items: String) {
+    override fun loginUser(response: User?) {
+        showToast("user Login method ${response?.email}")
+        subscribeUi(dataBinding, response)
+    }
+
+    override fun logoutUser(items: User?) {
+        showToast(
+            "user Logout method ${items?.email}"
+        )
+        subscribeUi(dataBinding, items)
 
     }
 
-    override fun logoutUser(items: String) {
-    }
-
-    override fun authenticateUser(items: String) {
-
-    }
 
 }

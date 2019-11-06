@@ -4,6 +4,9 @@
     package="com.vrlocal.android.baseproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name="BaseApplication"
         android:allowBackup="true"
@@ -17,6 +20,11 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="14f39459a6b2193a174c9b3889e8dd4fdb97c9e1" />
+        <activity android:name=".ui.base.CrashHandlerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
         <activity
             android:name=".ui.widgets.login.LoginActivity"
             android:label="@string/app_name"

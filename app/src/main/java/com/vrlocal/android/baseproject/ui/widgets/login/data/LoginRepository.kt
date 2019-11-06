@@ -1,9 +1,7 @@
 package com.vrlocal.android.baseproject.ui.widgets.login.data
 
 import androidx.lifecycle.distinctUntilChanged
-import com.vrlocal.android.baseproject.data.databaseLiveData
-import com.vrlocal.android.baseproject.data.networkLiveData
-import com.vrlocal.android.baseproject.data.resultLiveData
+import com.vrlocal.android.baseproject.data.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,4 +29,14 @@ class LoginRepository @Inject constructor(
         databaseQuery = {
             dao.getCurrentUser()
         }).distinctUntilChanged()
+
+
+    fun deleteUser() =
+        backgroundLiveData(backgroundCallback = { getSumValue() }).distinctUntilChanged()
+
+    private fun getSumValue(): VResult<Boolean> {
+        dao.removeUser()
+        return VResult.success(true)
+    }
+
 }

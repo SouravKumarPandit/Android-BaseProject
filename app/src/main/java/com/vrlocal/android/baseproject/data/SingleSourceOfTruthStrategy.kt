@@ -55,3 +55,10 @@ fun <A> networkLiveData(networkCall: suspend () -> VResult<A>): LiveData<VResult
             emit(VResult.error<A>(responseStatus.message!!))
         }
     }
+
+
+fun <V> backgroundLiveData(backgroundCallback: suspend () -> VResult<V>): LiveData<VResult<V>> =
+    liveData(Dispatchers.IO) {
+//        emit(VResult.loading<V>())
+        backgroundCallback.invoke();
+    }

@@ -25,7 +25,7 @@ abstract class BaseDataSource {
 
     private fun <T> error(message: String): VResult<T> {
         Timber.e(message)
-        return VResult.error("Aw, Snap! found an error${message}")
+        return VResult.error("Aw, Snap! found an error ${message}")
     }
 
 }

@@ -3,16 +3,10 @@ package com.vrlocal.android.baseproject.api
 import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.ui.base.IView
 
-class VResultHandler(resultCallback: IView, result: VResult<Any>) {
-
+open class VResultHandler(resultCallback: IView, result: VResult<Any>, callerFun: (Any) -> Unit) {
     init {
         when (result.status) {
-            VResult.Status.SUCCESS -> {
-                resultCallback.hideProgressBar()
-                if (result.data != null)
-                    resultCallback.onResponse(result.data)
 
-            }
             VResult.Status.LOADING -> {
                 resultCallback.showProgressBar()
 
@@ -21,13 +15,20 @@ class VResultHandler(resultCallback: IView, result: VResult<Any>) {
                 resultCallback.hideProgressBar()
                 resultCallback.showError("" + result.message)
             }
-
+            VResult.Status.SUCCESS -> {
+                resultCallback.hideProgressBar()
+                if (result.data != null) {
+                    callerFun.invoke(result.data)
+                    resultCallback.onResponse(result.data)
+                }
+            }
             VResult.Status.NOT_AUTHENTICATED -> {
 
             }
             VResult.Status.AUTHENTICATED -> {
 
             }
+
         }
     }
 }
