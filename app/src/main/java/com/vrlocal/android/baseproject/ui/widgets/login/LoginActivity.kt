@@ -66,7 +66,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
                     Observer { result -> VResultHandler(this, result) { loginUser(result.data) } })
         })
         btnDeleteData.setOnClickListener(View.OnClickListener { _ ->
-
             val userNumber = edtUserId.text.toString()
             if (userNumber.isEmpty())
                 return@OnClickListener

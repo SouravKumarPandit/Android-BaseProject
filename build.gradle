@@ -9,7 +9,7 @@ buildscript {
 
         // App dependencies
         appCompatVersion = '1.1.0'
-        constraintLayoutVersion = '2.0.0-beta2'
+        constraintLayoutVersion = '2.0.0-beta3'
         coroutinesVersion = "1.3.0"
         fragmentVersion = '1.2.0-beta01'
         glideVersion = '4.10.0'
@@ -17,11 +17,11 @@ buildscript {
         kotlinVersion = '1.3.50'
         ktlintVersion = '0.30.0'
         ktxVersion = '1.1.0'
-        lifecycleVersion = '2.2.0-beta01'
+        lifecycleVersion = '2.2.0-rc02'
         materialVersion = '1.0.0'
         navigationVersion = '2.1.0'
-        recyclerViewVersion = '1.1.0-beta04'
-        roomVersion = '2.2.0'
+        recyclerViewVersion = '1.1.0-rc01'
+        roomVersion = '2.2.1'
         workVersion = '2.2.0'
         pagingVersion = '2.1.0'
         gsonVersion = '2.8.6'
@@ -46,7 +46,7 @@ buildscript {
         testCoreVersion = '1.2.0'
         testRunnerVersion = '1.2.0'
         testRulesVersion = '1.2.0'
-        kotlin_version = '1.3.50'
+        kotlin_version = '1.3.60'
 
     }
 
@@ -63,7 +63,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
-        classpath 'com.google.gms:google-services:4.3.2'
+        classpath 'com.google.gms:google-services:4.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         classpath 'io.fabric.tools:gradle:1.31.1'

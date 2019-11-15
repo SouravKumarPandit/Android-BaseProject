@@ -31,7 +31,7 @@ public class CLExceptionHandler implements
         StringWriter stackTrace = new StringWriter();
         exception.printStackTrace(new PrintWriter(stackTrace));
         StringBuilder errorReport = new StringBuilder();
-        errorReport.append("<br><h1>We are sorry our team will try to resolve this please report issue to us</h1><br><br>");
+        errorReport.append("<br><h1>our team will try to resolve this please report issue </h1><br><br>");
         errorReport.append("<br><h2> CAUSE OF ERROR </h2>");
         errorReport.append(stackTrace.toString());
         errorReport.append("<br><h2> DEVICE INFORMATION </h2>");

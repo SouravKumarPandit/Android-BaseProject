@@ -26,8 +26,8 @@ import androidx.cardview.widget.CardView;
 
 import com.vrlocal.android.baseproject.R;
 import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity;
-import com.vrlocal.android.baseproject.util.viewutils.VAlertDialog;
 import com.vrlocal.uicontrolmodule.common.VUtil;
+import com.vrlocal.uicontrolmodule.ui.VAlertDialog;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -60,7 +60,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         clButtonsLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         clButtonsLayout.setPadding(i5dp,i5dp,i5dp,i5dp);
         Button btSendLog = new Button(this);
-        btSendLog.setText("Send Error");
+        btSendLog.setText("Report");
         btSendLog.setId(R.id.sendLogButton);
         btSendLog.setOnClickListener(this);
         btSendLog.setBackground(VUtil.getRoundDrawableListState(0xFF2DB143,i20dp,0xFF1B882D,i20dp));
@@ -220,7 +220,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{""});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "CRM error log file");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Base App error log file");
         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + fullName));
         intent.putExtra(Intent.EXTRA_TEXT, sError); // do this so some email clients don't complain about empty body.
         startActivity(intent);

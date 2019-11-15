@@ -1,16 +1,19 @@
 package com.vrlocal.android.baseproject.ui.base
 
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.os.PersistableBundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -21,11 +24,10 @@ import com.vrlocal.android.baseproject.api.session.SessionManager
 import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.widgets.login.data.User
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
+import com.vrlocal.uicontrolmodule.app.VPermissionUtils
 import dagger.android.support.DaggerAppCompatActivity
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
-
-
 
 
 @SuppressLint("Registered")
@@ -41,6 +43,10 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         dataBinding = DataBindingUtil.setContentView(this, layoutId)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        VPermissionUtils.requestAllPermissions(this)
+    }
 
     @Inject
     public lateinit var sessionManager: SessionManager
@@ -122,8 +128,8 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
             Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
 
 
-        }else
-        super.onBackPressed()
+        } else
+            super.onBackPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -192,6 +198,42 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         mProgressBar.layoutParams = pbParam
         frameLayout.addView(mProgressBar)
         return frameLayout
+
+    }
+
+    @TargetApi(23)
+    override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
+
+        if (requestCode == VPermissionUtils.PERMISSION_ALL) {
+            VPermissionUtils.handlePermissionResult(
+                this@BaseActivity,
+                requestCode,
+                permissions,
+                grantResults
+            )
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+    }
+
+
+    @TargetApi(23)
+    public override
+            /**
+             * @param iRequestCode calling frag
+             * @param iStatus status
+             * @param data intent included bundle data
+             */
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == VPermissionUtils.OVER_LAY_PERMISSION) {
+            VPermissionUtils.handleOverlayPermissionResult(this@BaseActivity)
+        } else {
+            ViewUtils.hideKeyboard(this)
+
+        }
 
     }
 
