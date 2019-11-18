@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/legothemes_fragment"
-        android:name="com.vrlocal.android.baseproject.ui.widgets.legotheme.ui.LegoThemeFragment"
+        android:name="com.vrlocal.android.baseproject.ui.screens.legotheme.ui.LegoThemeFragment"
         android:label="@string/legothemes_title"
         tools:layout="@layout/fragment_themes">
 
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/legosets_fragment"
-        android:name="com.vrlocal.android.baseproject.ui.widgets.legoset.ui.LegoSetsFragment"
+        android:name="com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetsFragment"
         android:label="@string/legosets_title"
         tools:layout="@layout/fragment_legosets">
 
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/legoset_detail_fragment"
-        android:name="com.vrlocal.android.baseproject.ui.widgets.legoset.ui.LegoSetFragment"
+        android:name="com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetFragment"
         android:label="@string/legoset_details_title"
         tools:layout="@layout/fragment_lego_set">
 

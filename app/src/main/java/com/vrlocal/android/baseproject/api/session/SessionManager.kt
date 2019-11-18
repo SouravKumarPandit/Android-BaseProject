@@ -4,9 +4,8 @@ package com.vrlocal.android.baseproject.api.session
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
 import com.vrlocal.android.baseproject.data.VResult
-import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.util.VConstants
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,14 +22,14 @@ constructor() {
     fun authenticateWithId(source: LiveData<VResult<User>>) {
         cachedUser.setValue(VResult.loading(null as User?))
 
-        cachedUser.addSource(source, Observer<VResult<User>> { vResult ->
+        cachedUser.addSource(source) { vResult ->
             cachedUser.value = vResult
             cachedUser.removeSource(source)
 
             if (vResult.status == VResult.Status.ERROR) {
                 cachedUser.value = VResult.logout()
             }
-        })
+        }
     }
 
    /* fun authenticateUser(email: String,password:String){

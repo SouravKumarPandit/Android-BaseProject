@@ -1,8 +1,8 @@
 package com.vrlocal.android.baseproject.api
 
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
-import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoTheme
-import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
+import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoTheme
+import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

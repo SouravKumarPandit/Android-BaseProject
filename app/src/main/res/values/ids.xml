@@ -4,4 +4,5 @@
     <item name="base_constrainetlayout" type="id" />
     <item name="sendLogButton" type="id" />
     <item name="closeButton" type="id" />
+    <item name="square_constrain" type="id" />
 </resources>

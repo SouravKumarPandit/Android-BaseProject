@@ -1,7 +1,10 @@
 package com.vrlocal.android.baseproject.di.module
 
-import com.vrlocal.android.baseproject.ui.widgets.home.MainActivity
-import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
+import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
+import com.vrlocal.android.baseproject.ui.screens.home.SplashActivity
+import com.vrlocal.android.baseproject.ui.screens.home.old.LegoMainActivity
+import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
+import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,11 +14,21 @@ abstract class ActivityBuilderModule {
 
 
     @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
-    abstract fun contributeMainActivity(): MainActivity
+    abstract fun contributeMainActivity(): LegoMainActivity
 
+    @ContributesAndroidInjector()
+    abstract fun contributeSplashActivity(): SplashActivity
 
     @ContributesAndroidInjector()
     abstract fun contributeLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector()
+    abstract fun contributeHomeActivity(): HomeActivity
+
+    @ContributesAndroidInjector()
+    abstract fun contributeUserProfileActivity(): UserProfileActivity
+
+
 
 //    @ContributesAndroidInjector(modules = [AuthViewModelsModule::class, LoginModule::class])
 //    abstract fun contributeAuthActivity(): LoginActivity

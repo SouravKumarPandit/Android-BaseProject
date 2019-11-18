@@ -14,7 +14,7 @@
             android:clipToPadding="false"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:context="com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity"
+            tools:context="com.vrlocal.android.baseproject.ui.screens.login.LoginActivity"
             tools:listitem="@layout/list_item_theme"/>
 
     </FrameLayout>

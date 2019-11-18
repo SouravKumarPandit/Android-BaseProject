@@ -3,5 +3,12 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#56B864</color>
-    <color name="colorImagePlaceholder">#D3D3D3</color>
+
+    <color name="colorImagePlaceholder">#F0EBEB</color>
+
+    <color name="white">#ffffff</color>
+    <color name="colorAccentDark">#219E27</color>
+
+
+
 </resources>

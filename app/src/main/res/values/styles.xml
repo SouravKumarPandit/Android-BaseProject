@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+<!--        <item name="colorButtonNormal">@color/colorPrimary</item>-->
+<!--        <item name="colorControlHighlight">@color/colorAccent</item>-->
+<!--        <item name="buttonStyle">@style/PrimaryFlatButton</item>-->
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +23,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="PrimaryFlatButton" parent="TextAppearance.MaterialComponents.Button">-->
+<!--        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>-->
+<!--        <item name="colorControlHighlight">@color/colorAccent</item>-->
+<!--        <item name="android:textColor">@color/white</item>-->
+<!--        <item name="colorAccent">@color/colorPrimary</item>-->
+<!--    </style>-->
 
 </resources>

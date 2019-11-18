@@ -10,7 +10,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="legoSet"
-            type="com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet"/>
+            type="com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

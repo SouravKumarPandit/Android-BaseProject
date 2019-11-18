@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.vrlocal.android.baseproject.data.AppDatabase
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
+import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.util.VConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope

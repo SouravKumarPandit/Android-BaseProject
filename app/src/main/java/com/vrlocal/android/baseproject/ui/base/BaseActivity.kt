@@ -15,42 +15,58 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
-import com.vrlocal.android.baseproject.api.session.SessionManager
-import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity
-import com.vrlocal.android.baseproject.ui.widgets.login.data.User
+import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
+import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import com.vrlocal.uicontrolmodule.app.VPermissionUtils
 import dagger.android.support.DaggerAppCompatActivity
 import io.fabric.sdk.android.Fabric
-import javax.inject.Inject
 
 
 @SuppressLint("Registered")
-open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
+abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     DaggerAppCompatActivity(), IView {
     private var doubleBackToExitPressedOnce = false
-    open lateinit var dataBinding: B
-    open lateinit var baseViewModel: T
-
+    private var darkStatusBar = false
+    open lateinit var bindingData: B
+    open lateinit var viewModel: T
     private lateinit var mProgressBar: ProgressBar
     private lateinit var frameLayout: FrameLayout
+
+
+//    @Inject
+//    public lateinit var sessionManager: SessionManager
+
     protected fun bindView(layoutId: Int) {
-        dataBinding = DataBindingUtil.setContentView(this, layoutId)
+        bindingData = DataBindingUtil.setContentView(this, layoutId)
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Fabric.with(this, Crashlytics())
+//        VPermissionUtils.requestAllPermissions(this)
+//        subscribeObservers()
+        if (darkStatusBar)
+            makeStatusBarTransparent()
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        VPermissionUtils.requestAllPermissions(this)
+
+
     }
 
-    @Inject
-    public lateinit var sessionManager: SessionManager
-
+    /**warning:
+     * The root of the activity container must be of type ConstraintLayout
+     *  DO NOT CHANGE THIS CONSISTENCY
+     * */
     override fun setContentView(layoutResID: Int) {
 
         val constraintLayout: ConstraintLayout =
@@ -59,6 +75,7 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         val initFrame = initFrame()
         constraintLayout.addView(initFrame)
         super.setContentView(constraintLayout)
+        removeStatusBarPadding(constraintLayout)
 
     }
 
@@ -66,28 +83,45 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         val constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
-        super.setContentView(view)
+        constraintLayout.fitsSystemWindows = true
+        super.setContentView(constraintLayout)
+        removeStatusBarPadding(constraintLayout)
+
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
         val constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
+        constraintLayout.fitsSystemWindows = true
         super.setContentView(view, params)
-        showProgressBar()
+        removeStatusBarPadding(constraintLayout)
+
 
     }
 
 
+    private fun removeStatusBarPadding(constraintLayout: ConstraintLayout) {
+
+        ViewCompat.setOnApplyWindowInsetsListener(constraintLayout) { _, insets ->
+            insets.consumeSystemWindowInsets()
+        }
+    }
+
+    fun getProgressBar(): ProgressBar {
+        return mProgressBar;
+    }
+
     override fun onDestroy() {
-        baseViewModel.detachView()
+        viewModel.detachView()
         super.onDestroy()
     }
 
 
     val Int.dp: Int
         get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-    private val Int.px: Int
+
+    val Int.px: Int
         get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 
@@ -114,7 +148,7 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
             return;
         }
 
-        if (this is LoginActivity) {
+        if (this is HomeActivity) {
 
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()
@@ -123,7 +157,7 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
             this.doubleBackToExitPressedOnce = true
 //        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
-            showSnackBar("press again to exit", 0)
+            showSnackBar("press BACK again to exit", 0)
 
             Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
 
@@ -132,11 +166,6 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
             super.onBackPressed()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Fabric.with(this, Crashlytics())
-//        subscribeObservers()
-    }
 
     private fun subscribeObservers() {
 
@@ -237,11 +266,12 @@ open class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
     }
 
+    protected fun setDarkStatusBar(isDark: Boolean) {
+        this.darkStatusBar = isDark
+    }
 
     override fun onResponse(responseObject: Any?) {
-        if (responseObject is User) {
-            sessionManager.getLogeInUser()
-        }
+
     }
 
     override fun showToast(message: String) {

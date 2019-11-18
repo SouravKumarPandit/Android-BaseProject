@@ -8,12 +8,12 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSet
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSetDao
-import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoTheme
-import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoThemeDao
-import com.vrlocal.android.baseproject.ui.widgets.login.data.User
-import com.vrlocal.android.baseproject.ui.widgets.login.data.UserDao
+import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
+import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSetDao
+import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoTheme
+import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoThemeDao
+import com.vrlocal.android.baseproject.ui.screens.login.data.User
+import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import com.vrlocal.android.baseproject.util.VConstants
 import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 

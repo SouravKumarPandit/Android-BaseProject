@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vrlocal.android.baseproject.di.component.ViewModelFactory
 import com.vrlocal.android.baseproject.di.scope.ViewModelKey
-import com.vrlocal.android.baseproject.ui.widgets.home.MainViewModel
-import com.vrlocal.android.baseproject.ui.widgets.legoset.ui.LegoSetViewModel
-import com.vrlocal.android.baseproject.ui.widgets.legoset.ui.LegoSetsViewModel
-import com.vrlocal.android.baseproject.ui.widgets.legotheme.ui.LegoThemeViewModel
-import com.vrlocal.android.baseproject.ui.widgets.login.LoginViewModel
+import com.vrlocal.android.baseproject.ui.screens.home.HomeViewModel
+import com.vrlocal.android.baseproject.ui.screens.home.SplashViewModel
+import com.vrlocal.android.baseproject.ui.screens.home.old.MainViewModel
+import com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetViewModel
+import com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetsViewModel
+import com.vrlocal.android.baseproject.ui.screens.legotheme.ui.LegoThemeViewModel
+import com.vrlocal.android.baseproject.ui.screens.login.LoginViewModel
+import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileViewHolder
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,6 +19,39 @@ import dagger.multibindings.IntoMap
 @Suppress("unused")
 @Module()
 abstract class ViewModelModule {
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserProfileViewHolder::class)
+    abstract fun bindUserProfileViewHolder(viewModel: UserProfileViewHolder): ViewModel
+
+
+
+    //----------------------- sample data ---------------------------------------//
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(LegoThemeViewModel::class)
@@ -31,17 +67,6 @@ abstract class ViewModelModule {
     @ViewModelKey(LegoSetViewModel::class)
     abstract fun bindLegoSetViewModel(viewModel: LegoSetViewModel): ViewModel
 
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
-
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

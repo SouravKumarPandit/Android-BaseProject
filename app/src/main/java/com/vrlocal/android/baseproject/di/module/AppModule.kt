@@ -7,8 +7,8 @@ import com.vrlocal.android.baseproject.api.AuthInterceptor
 import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.di.CoroutineScropeIO
 import com.vrlocal.android.baseproject.di.LegoAPI
-import com.vrlocal.android.baseproject.ui.widgets.legoset.data.LegoSetRemoteDataSource
-import com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoThemeRemoteDataSource
+import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSetRemoteDataSource
+import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoThemeRemoteDataSource
 import com.vrlocal.android.baseproject.util.VConstants
 import dagger.Module
 import dagger.Provides

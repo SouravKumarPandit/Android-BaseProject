@@ -11,7 +11,7 @@
 
         <variable
             name="legoTheme"
-            type="com.vrlocal.android.baseproject.ui.widgets.legotheme.data.LegoTheme"/>
+            type="com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoTheme"/>
     </data>
 
     <androidx.cardview.widget.CardView

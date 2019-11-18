@@ -25,7 +25,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.cardview.widget.CardView;
 
 import com.vrlocal.android.baseproject.R;
-import com.vrlocal.android.baseproject.ui.widgets.login.LoginActivity;
+import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity;
 import com.vrlocal.uicontrolmodule.common.VUtil;
 import com.vrlocal.uicontrolmodule.ui.VAlertDialog;
 

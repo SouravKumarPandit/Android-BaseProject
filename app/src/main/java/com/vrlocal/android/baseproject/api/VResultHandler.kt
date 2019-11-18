@@ -19,7 +19,7 @@ open class VResultHandler(resultCallback: IView, result: VResult<Any>, callerFun
                 resultCallback.hideProgressBar()
                 if (result.data != null) {
                     callerFun.invoke(result.data)
-                    resultCallback.onResponse(result.data)
+//                    resultCallback.onResponse(result.data)
                 }
             }
             VResult.Status.NOT_AUTHENTICATED -> {
