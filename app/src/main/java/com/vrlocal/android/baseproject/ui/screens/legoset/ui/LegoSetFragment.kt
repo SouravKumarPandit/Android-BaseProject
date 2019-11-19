@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.binding.bindImageFromUrl
 import com.vrlocal.android.baseproject.data.VResult
 import com.vrlocal.android.baseproject.databinding.FragmentLegoSetBinding
 import com.vrlocal.android.baseproject.di.component.injectViewModel
 import com.vrlocal.android.baseproject.ui.base.BaseFragment
+import com.vrlocal.android.baseproject.ui.common.bindImageFromUrl
 import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.util.intentOpenWebsite
 import com.vrlocal.android.baseproject.util.intentShareText

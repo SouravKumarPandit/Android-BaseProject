@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.crashlytics.android.Crashlytics
 import com.google.android.material.snackbar.Snackbar
+import com.vrlocal.android.baseproject.ui.common.makeStatusBarTransparent
 import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
 import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils

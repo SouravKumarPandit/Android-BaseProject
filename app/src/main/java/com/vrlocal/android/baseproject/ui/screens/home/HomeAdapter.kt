@@ -1,27 +1,48 @@
 package com.vrlocal.android.baseproject.ui.screens.home
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.vrlocal.android.baseproject.BR
 import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOptions
-import com.vrlocal.android.baseproject.util.viewutils.fontutils.IconView
+import com.vrlocal.android.baseproject.databinding.AdapterHomeBinding
+import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
+import com.vrlocal.uicontrolmodule.common.VUtil
+import kotlinx.android.synthetic.main.adapter_home.view.*
 
-class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOptions>) :
+
+class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOption>) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val inflate = LayoutInflater.from(context).inflate(R.layout.adapter_home, parent,false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val itemBinding: AdapterHomeBinding =
+            AdapterHomeBinding.inflate(layoutInflater, parent, false)
+        itemBinding.root.cvOptionCard.background = VUtil.getDrawableListState(
+            VUtil.getRoundDrawable(Color.TRANSPARENT, 8f),
+            VUtil.getRoundDrawable(0x9000000, 8f)
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            itemBinding.root.iconService.setTextColor(
+                VUtil.getColorStateListDrawable(
+                    context.resources.getColor(
+                        R.color.colorAccent,
+                        context.theme
+                    ),
+                    context.resources.getColor(
+                        R.color.colorPrimary,
+                        context.theme
+                    )
+                )
 
-//        inflate.cvOptionCard.background = VUtil.getDrawableListState(
-//            VUtil.getRoundDrawable(Color.TRANSPARENT, 8f),
-//            VUtil.getRoundDrawable(Color.LTGRAY, 8f)
-//        )
-        return ItemViewHolder(inflate)
+            )
+        }
+        return ItemViewHolder(itemBinding)
+
     }
 
     override fun getItemCount(): Int {
@@ -29,14 +50,19 @@ class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOp
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.itemLabel.text = optionList[position].label
-        holder.iconView.setText(optionList[position].iconRes)
+        val homeOption: HomeOption = optionList[position]
+        holder.bind(homeOption)
     }
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var itemLabel: TextView = itemView.findViewById(R.id.tvItemLabel)
-        var cvOptionCard: CardView = itemView.findViewById(R.id.cvOptionCard)
-        var iconView: IconView = itemView.findViewById(R.id.iconService)
+    inner class ItemViewHolder(itemView: AdapterHomeBinding) :
+        RecyclerView.ViewHolder(itemView.root) {
+        var adapterBinding: AdapterHomeBinding = itemView
+        private var cvOptionCard: CardView = itemView.root.findViewById(R.id.cvOptionCard)
+        fun bind(homeOption: HomeOption) {
+            adapterBinding.setVariable(BR.homeOption, homeOption)
+            adapterBinding.executePendingBindings()
+        }
+
 
         init {
             cvOptionCard.setOnClickListener { _ ->

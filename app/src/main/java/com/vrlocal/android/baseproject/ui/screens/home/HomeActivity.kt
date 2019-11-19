@@ -10,7 +10,7 @@ import com.vrlocal.android.baseproject.ui.common.GridSpacingItemDecoration
 import com.vrlocal.android.baseproject.ui.common.MiddleDividerItemDecoration
 import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
-import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOptions
+import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
 import com.vrlocal.android.baseproject.ui.screens.photos.PhotosActivity
 import com.vrlocal.android.baseproject.ui.screens.posts.PostActivity
 import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileActivity
@@ -40,7 +40,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
         val middleDividerItemDecoration =
             MiddleDividerItemDecoration(this, MiddleDividerItemDecoration.ALL)
         middleDividerItemDecoration.setDividerColor(Color.GRAY)
-
         /*FOR MAKING DIVIDER SQUARE*/
 //        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
 //        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -50,8 +49,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
 
     }
 
-    private fun getOptionList(): List<HomeOptions> {
-        val list: ArrayList<HomeOptions> = ArrayList<HomeOptions>()
+    private fun getOptionList(): List<HomeOption> {
+        val list: ArrayList<HomeOption> = ArrayList<HomeOption>()
 
         val arrayListOf = arrayListOf("users", "posts", "comments", "albums", "photos", "todos");
         val iconList = arrayListOf(
@@ -72,7 +71,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
             TodoActivity::class.java
         );
         arrayListOf.forEachIndexed() { index, sValue ->
-            val homeOptions = HomeOptions(sValue, iconList[index], "\\$sValue", classList[index])
+            val homeOptions = HomeOption(sValue, iconList[index], "\\$sValue", classList[index])
             list.add(homeOptions)
         }
 

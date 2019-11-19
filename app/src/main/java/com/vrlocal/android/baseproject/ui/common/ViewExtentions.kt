@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.base
+package com.vrlocal.android.baseproject.ui.common
 
 import android.app.Activity
 import android.graphics.Color
