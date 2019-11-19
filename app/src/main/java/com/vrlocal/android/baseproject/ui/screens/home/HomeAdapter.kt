@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOptions
+import com.vrlocal.android.baseproject.util.viewutils.fontutils.IconView
 
 class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOptions>) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
@@ -28,12 +29,14 @@ class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOp
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.itemLabel.text = optionList.get(position).label
+        holder.itemLabel.text = optionList[position].label
+        holder.iconView.setText(optionList[position].iconRes)
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemLabel: TextView = itemView.findViewById(R.id.tvItemLabel)
         var cvOptionCard: CardView = itemView.findViewById(R.id.cvOptionCard)
+        var iconView: IconView = itemView.findViewById(R.id.iconService)
 
         init {
             cvOptionCard.setOnClickListener { _ ->

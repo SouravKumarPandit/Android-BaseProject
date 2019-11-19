@@ -10,6 +10,7 @@ import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import javax.inject.Inject
 
+
 class  UserProfileActivity : BaseActivity<ActivityProfileBinding,UserProfileViewHolder>() , IUserProfileView {
 
 
@@ -31,7 +32,10 @@ class  UserProfileActivity : BaseActivity<ActivityProfileBinding,UserProfileView
                 result
             ) { subscribedUI(result.data) }
         })
-
+//        val drawable = IconFontDrawable(this, R.string.ic_av_timer)
+//        drawable.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+//        drawable.textSize=25.px.toFloat()
+//        iconText.background=drawable
     }
 
     private fun subscribedUI(data: User?) {

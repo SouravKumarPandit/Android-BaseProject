@@ -1,17 +1,25 @@
-package com.vrlocal.android.baseproject.util.viewutils;
+package com.vrlocal.android.baseproject.util.viewutils.fontutils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.TypedValue;
 
-public class FontIconDrawable extends Drawable {
+import com.vrlocal.uicontrolmodule.common.VUtil;
+
+public class IconFontDrawable extends Drawable {
 
     /* Platform XML constants for typeface */
     private static final int SANS = 1;
@@ -46,9 +54,17 @@ public class FontIconDrawable extends Drawable {
             android.R.attr.textColor
     };
 
-
-    public FontIconDrawable(Context context) {
+    public IconFontDrawable(Context context, int faIconRes, boolean isSolid, boolean isBrand) {
         super();
+        init(context, faIconRes, isSolid, isBrand);
+    }
+
+    public IconFontDrawable(Context context, int faIconRes) {
+        super();
+        init(context, faIconRes, false, false);
+    }
+
+    private void init(Context context, int faIconRes, boolean isSolid, boolean isBrand) {
         //Used to load and scale resource items
         mResources = context.getResources();
         //Definition of this drawables size
@@ -58,7 +74,7 @@ public class FontIconDrawable extends Drawable {
         mTextPaint.density = mResources.getDisplayMetrics().density;
         mTextPaint.setDither(true);
 
-        int textSize = 15;
+        int textSize = (int) VUtil.spToPx(24);
         ColorStateList textColor = null;
         int styleIndex = -1;
         int typefaceIndex = -1;
@@ -73,7 +89,7 @@ public class FontIconDrawable extends Drawable {
             ap = context.obtainStyledAttributes(appearanceId, appearanceAttributes);
         }
         if (ap != null) {
-            for (int i=0; i < ap.getIndexCount(); i++) {
+            for (int i = 0; i < ap.getIndexCount(); i++) {
                 int attr = ap.getIndex(i);
                 switch (attr) {
                     case 0: //Text Size
@@ -100,26 +116,21 @@ public class FontIconDrawable extends Drawable {
         setRawTextSize(textSize);
 
         Typeface tf = null;
-        switch (typefaceIndex) {
-            case SANS:
-                tf = Typeface.SANS_SERIF;
-                break;
-
-            case SERIF:
-                tf = Typeface.SERIF;
-                break;
-
-            case MONOSPACE:
-                tf = Typeface.MONOSPACE;
-                break;
+        if (isSolid) {
+            tf = FontCache.get(context, FontCache.FA_FONT_SOLID);
+        } else if (isBrand) {
+            tf = FontCache.get(context, FontCache.FA_FONT_BRANDS);
+        } else {
+            tf = FontCache.get(context, FontCache.FA_FONT_REGULAR);
         }
-
         setTypeface(tf, styleIndex);
+        setText(context.getString(faIconRes));
     }
 
 
     /**
      * Set the text that will be displayed
+     *
      * @param text Text to display
      */
     public void setText(CharSequence text) {
@@ -146,6 +157,7 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Set the text size.  The value will be interpreted in "sp" units
+     *
      * @param size Text size value, in sp
      */
     public void setTextSize(float size) {
@@ -154,6 +166,7 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Set the text size, using the supplied complex units
+     *
      * @param unit Units for the text size, such as dp or sp
      * @param size Text size value
      */
@@ -169,7 +182,6 @@ public class FontIconDrawable extends Drawable {
     private void setRawTextSize(float size) {
         if (size != mTextPaint.getTextSize()) {
             mTextPaint.setTextSize(size);
-
             measureContent();
         }
     }
@@ -183,6 +195,7 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Set the horizontal stretch factor of the text
+     *
      * @param size Text scale factor
      */
     public void setTextScaleX(float size) {
@@ -203,11 +216,12 @@ public class FontIconDrawable extends Drawable {
      * Set the text alignment.  The alignment itself is based on the text layout direction.
      * For LTR text NORMAL is left aligned and OPPOSITE is right aligned.
      * For RTL text, those alignments are reversed.
-     * @param align Text alignment value.  Should be set to one of:
      *
-     *   {@link Layout.Alignment#ALIGN_NORMAL},
-     *   {@link Layout.Alignment#ALIGN_NORMAL},
-     *   {@link Layout.Alignment#ALIGN_OPPOSITE}.
+     * @param align Text alignment value.  Should be set to one of:
+     *              <p>
+     *              {@link Layout.Alignment#ALIGN_NORMAL},
+     *              {@link Layout.Alignment#ALIGN_NORMAL},
+     *              {@link Layout.Alignment#ALIGN_OPPOSITE}.
      */
     public void setTextAlign(Layout.Alignment align) {
         if (mTextAlignment != align) {
@@ -236,7 +250,6 @@ public class FontIconDrawable extends Drawable {
      * and turns on the fake bold and italic bits in the Paint if the
      * Typeface that you provided does not have all the bits in the
      * style that you specified.
-     *
      */
     public void setTypeface(Typeface tf, int style) {
         if (style > 0) {
@@ -252,9 +265,7 @@ public class FontIconDrawable extends Drawable {
             int need = style & ~typefaceStyle;
             mTextPaint.setFakeBoldText((need & Typeface.BOLD) != 0);
             mTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
-        }
-        else
-        {
+        } else {
             mTextPaint.setFakeBoldText(false);
             mTextPaint.setTextSkewX(0);
             setTypeface(tf);
@@ -271,6 +282,7 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Set a single text color for all states
+     *
      * @param color Color value such as {@link Color#WHITE} or {@link Color#argb(int, int, int, int)}
      */
     public void setTextColor(int color) {
@@ -279,6 +291,7 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Set the text color as a state list
+     *
      * @param colorStateList ColorStateList of text colors, such as inflated from an R.color resource
      */
     public void setTextColor(ColorStateList colorStateList) {
@@ -288,10 +301,10 @@ public class FontIconDrawable extends Drawable {
 
     /**
      * Optional Path object on which to draw the text.  If this is set,
-     * FontIconDrawable cannot properly measure the bounds this drawable will need.
+     * IconFontDrawable cannot properly measure the bounds this drawable will need.
      * You must call {@link #setBounds(int, int, int, int) setBounds()} before
-     * applying this FontIconDrawable to any View.
-     *
+     * applying this IconFontDrawable to any View.
+     * <p>
      * Calling this method with <code>null</code> will remove any Path currently attached.
      */
     public void setTextPath(Path path) {
@@ -314,15 +327,14 @@ public class FontIconDrawable extends Drawable {
             mTextBounds.setEmpty();
         } else {
             //Measure text bounds
-            double desired = Math.ceil( Layout.getDesiredWidth(mText, mTextPaint) );
-            mTextLayout = new StaticLayout(mText, mTextPaint, (int)desired,
+            double desired = Math.ceil(Layout.getDesiredWidth(mText, mTextPaint));
+            mTextLayout = new StaticLayout(mText, mTextPaint, (int) desired,
                     mTextAlignment, 1.0f, 0.0f, false);
             mTextBounds.set(0, 0, mTextLayout.getWidth(), mTextLayout.getHeight());
         }
 
         //We may need to be redrawn
         invalidateSelf();
-
     }
 
     /**
@@ -332,7 +344,7 @@ public class FontIconDrawable extends Drawable {
         int newColor = mTextColors.getColorForState(stateSet, Color.WHITE);
         if (mTextPaint.getColor() != newColor) {
             mTextPaint.setColor(newColor);
-            return  true;
+            return true;
         }
 
         return false;
@@ -412,8 +424,5 @@ public class FontIconDrawable extends Drawable {
             mTextPaint.setColorFilter(cf);
         }
     }
-
-
-
 
 }
