@@ -1,24 +1,26 @@
 package com.vrlocal.android.baseproject.ui.screens.profile
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityProfileBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
+import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
-import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
+import kotlinx.android.synthetic.main.activity_profile.*
 import javax.inject.Inject
 
 
-class  UserProfileActivity : BaseActivity<ActivityProfileBinding,UserProfileViewHolder>() , IUserProfileView {
-
-
-    @Inject
-    lateinit var userDao: UserDao
+class UserProfileActivity : BaseActivity<ActivityProfileBinding, UserProfileViewModel>(),
+    IUserProfileView {
 
     @Inject
-    override lateinit var viewModel: UserProfileViewHolder
+    override lateinit var viewModel: UserProfileViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,19 +28,55 @@ class  UserProfileActivity : BaseActivity<ActivityProfileBinding,UserProfileView
         this.bindView(R.layout.activity_profile)
         viewModel.attachView(this)
 
+        setSupportActionBar(tbProfileToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Profile"
+    }
+
+    private fun subscribedUI(data: User?) {
+        bindingData.userData = data
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_profile, menu)
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getUserInfo().observe(this, Observer { result ->
             VResultHandler(
                 this@UserProfileActivity,
                 result
             ) { subscribedUI(result.data) }
         })
-//        val drawable = IconFontDrawable(this, R.string.ic_av_timer)
-//        drawable.setTextColor(ContextCompat.getColor(this, android.R.color.black))
-//        drawable.textSize=25.px.toFloat()
-//        iconText.background=drawable
     }
 
-    private fun subscribedUI(data: User?) {
-        bindingData.userData=data
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_logout) {
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
+            viewModel.logoutUser().observe(this, Observer { result ->
+                VResultHandler(
+                    this@UserProfileActivity,
+                    result
+                ) { logoutCurrentUser(result.data) }
+            })
+        }
+        return super.onOptionsItemSelected(item)
     }
+
+    private fun logoutCurrentUser(it: Boolean?) {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
+    }
+
+
 }

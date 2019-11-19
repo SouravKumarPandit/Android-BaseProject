@@ -3,6 +3,7 @@ package com.vrlocal.android.baseproject.ui.screens.profile.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.distinctUntilChanged
 import com.vrlocal.android.baseproject.data.VResult
+import com.vrlocal.android.baseproject.data.backgroundLiveData
 import com.vrlocal.android.baseproject.data.databaseLiveData
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
@@ -20,4 +21,13 @@ class ProfileRepository @Inject constructor(
         }).distinctUntilChanged()
 
 
+    fun deleteUser() =
+        backgroundLiveData(backgroundCallback = { removeCurrentUser()
+
+        }).distinctUntilChanged()
+
+    private fun removeCurrentUser(): VResult<Boolean> {
+        dao.removeUser()
+        return VResult.success(true)
+    }
 }

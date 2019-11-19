@@ -25,4 +25,14 @@
     <string name="image">IMG</string>
     <string name="long_text">The code is below. When fragment loads, it covers the toolbar and my floating action bar. How can I handle this? I want the toolbar to show. It seems there is some overlapping in coordinatorlayout. I have checked out different problems like this. None seems to answer my question   The code is below. When fragment loads, it covers the toolbar and my floating action bar. How can I handle this? I want the toolbar to show. It seems there is some overlapping in coordinatorlayout. I have checked out different problems like this. None seems to answer my question   The code is below. When fragment loads, it covers the toolbar and my floating action bar. How can I handle this? I want the toolbar to show. It seems there is some overlapping in coordinatorlayout. I have checked out different problems like this. None seems to answer my question   The code is below. When fragment loads, it covers the toolbar and my floating action bar. How can I handle this? I want the toolbar to show. It seems there is some overlapping in coordinatorlayout. I have checked out different problems like this. None seems to answer my question</string>
 
+    <string name="userId">User id</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="website">Website</string>
+    <string name="company">Company</string>
+    <string name="address">Address</string>
+    <string name="email">Email</string>
+    <string name="logout">Logout</string>
+
+
 </resources>

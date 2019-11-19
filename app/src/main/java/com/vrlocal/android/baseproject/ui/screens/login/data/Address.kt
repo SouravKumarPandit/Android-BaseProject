@@ -28,6 +28,11 @@ class Address {
     @Expose
     var geo: Geo? = null
 
-
-
+    override fun toString(): String {
+        return         "Street : ${street}\n"+
+        "Suite : ${suite}\n"+
+        "City : ${city}\n"+
+        "ZipCode : ${zipcode}\n"+
+        "Geo : ${geo?.lat} /${geo?.lng}\n";
+    }
 }

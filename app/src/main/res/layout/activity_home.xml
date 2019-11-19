@@ -40,7 +40,6 @@
                         android:contentDescription="@string/image"
                         android:src="@drawable/shader_color">
 
-
                     </ImageView>
 
                     <androidx.appcompat.widget.Toolbar
@@ -49,7 +48,7 @@
                         android:layout_height="@dimen/_50sdp"
                         app:layout_collapseMode="pin"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                        app:title="HOME" />
+                        app:title="Json placeHolder" />
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 

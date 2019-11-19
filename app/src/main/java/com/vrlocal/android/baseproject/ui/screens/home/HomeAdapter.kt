@@ -1,11 +1,9 @@
 package com.vrlocal.android.baseproject.ui.screens.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.BR
@@ -16,7 +14,11 @@ import com.vrlocal.uicontrolmodule.common.VUtil
 import kotlinx.android.synthetic.main.adapter_home.view.*
 
 
-class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOption>) :
+class HomeAdapter(
+    val context: HomeActivity,
+    private val optionList: List<HomeOption>,
+    private val clickedListener: (adapterPosition: Int) -> Unit
+) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -66,20 +68,7 @@ class HomeAdapter(val context: HomeActivity, private val optionList: List<HomeOp
 
         init {
             cvOptionCard.setOnClickListener { _ ->
-
-                if (optionList[adapterPosition].activityClass == null) {
-                    Toast.makeText(
-                        context,
-                        "Implement class",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                    return@setOnClickListener
-                }
-
-                val intent = Intent(context, optionList[adapterPosition].activityClass)
-                context.startActivity(intent)
-
+                clickedListener(adapterPosition)
             }
         }
 

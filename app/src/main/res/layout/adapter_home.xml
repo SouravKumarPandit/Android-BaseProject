@@ -43,7 +43,7 @@
                     android:shadowRadius="10"
                     android:text="@{homeOption.iconRes}"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_50sdp">
+                    android:textSize="@dimen/_35sdp">
 
                 </com.vrlocal.android.baseproject.util.viewutils.fontutils.IconView>
 

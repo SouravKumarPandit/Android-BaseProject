@@ -11,11 +11,10 @@ import javax.inject.Inject
 //    BaseViewModel<IView>() {}
 
 
-class UserProfileViewHolder @Inject constructor(private val repository: ProfileRepository) :
+class UserProfileViewModel @Inject constructor(private val repository: ProfileRepository) :
     BaseViewModel<IUserProfileView>() {
 
     fun  getUserInfo(): LiveData<VResult<User>> = repository.getUserData()
-
-
+    fun logoutUser() : LiveData<VResult<Boolean>> = repository.deleteUser()
 
 }

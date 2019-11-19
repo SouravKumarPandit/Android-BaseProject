@@ -36,7 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), I
             VResultHandler(
                 this@SplashActivity,
                 result
-            ) { validateUserSession(result.data) }
+            ) { validateUserSession(data = result.data) }
         })
         getProgressBar().visibility = View.VISIBLE
         getProgressBar().animate().translationY(VUtil.screenHeight / 3.toFloat()).duration = 1000
@@ -57,21 +57,22 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), I
         )
         startActivity(i)
         finishAffinity()
-
-
-      /*  Handler().postDelayed({
-            val i = Intent(
-                this@SplashActivity,
-                navigatorClass
-            )
-            startActivity(i)
-            finishAffinity()
-        }, 2000)*/
+        /*  Handler().postDelayed({
+              val i = Intent(
+                  this@SplashActivity,
+                  navigatorClass
+              )
+              startActivity(i)
+              finishAffinity()
+          }, 2000)*/
     }
-
     override fun validateUserSession(data: User?) {
-        getProgressBar().visibility = View.VISIBLE
+
         navigateToActivity(data != null)
     }
 
+    override fun showError(error: String) {
+//        super.showError(error)
+        validateUserSession(null)
+    }
 }

@@ -48,3 +48,4 @@ fun bindRenderHtml(view: TextView, description: String?) {
         view.text = ""
     }
 }
+

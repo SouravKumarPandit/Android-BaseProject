@@ -18,5 +18,9 @@ class Company {
     @Expose
     var bs: String? = null
 
-
+    override fun toString(): String {
+        return "Company name: ${name}\n"+
+                "CatchPhrase : ${name}\n"+
+                "BS : ${name}\n";
+    }
 }

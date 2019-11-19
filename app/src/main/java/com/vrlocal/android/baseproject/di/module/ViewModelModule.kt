@@ -11,7 +11,8 @@ import com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetViewModel
 import com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetsViewModel
 import com.vrlocal.android.baseproject.ui.screens.legotheme.ui.LegoThemeViewModel
 import com.vrlocal.android.baseproject.ui.screens.login.LoginViewModel
-import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileViewHolder
+import com.vrlocal.android.baseproject.ui.screens.posts.PostViewModel
+import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -40,8 +41,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(UserProfileViewHolder::class)
-    abstract fun bindUserProfileViewHolder(viewModel: UserProfileViewHolder): ViewModel
+    @ViewModelKey(UserProfileViewModel::class)
+    abstract fun bindUserProfileViewModel(viewModel: UserProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostViewModel::class)
+    abstract fun bindPostViewModel(viewModel: PostViewModel): ViewModel
 
 
 
