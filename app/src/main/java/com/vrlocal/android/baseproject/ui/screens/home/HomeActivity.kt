@@ -4,11 +4,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vrlocal.android.baseproject.R
+import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityHomeBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
-import com.vrlocal.android.baseproject.ui.common.GridSpacingItemDecoration
 import com.vrlocal.android.baseproject.ui.common.MiddleDividerItemDecoration
 import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
@@ -30,26 +31,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
         super.onCreate(savedInstanceState)
         this.bindView(R.layout.activity_home)
         viewModel.attachView(this)
+        getDashBoardOption()
 
+    }
+
+    private fun setRecyclerViewData(data: List<HomeOption>) {
         rvDashBoard.adapter =
-            HomeAdapter(this, getOptionList(), clickedListener = { onHomeOptionSelected(it) })
-        rvDashBoard.addItemDecoration(
-            GridSpacingItemDecoration(
-                spanCount = 2,
-                spacing = 2.px,
-                includeEdge = true
-            )
-        )
+            HomeAdapter(this, data, clickedListener = { onHomeOptionSelected(it) })
+
         val middleDividerItemDecoration =
             MiddleDividerItemDecoration(this, MiddleDividerItemDecoration.ALL)
         middleDividerItemDecoration.setDividerColor(Color.GRAY)
-        /*FOR MAKING DIVIDER SQUARE*/
-//        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-//        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         rvDashBoard.addItemDecoration(middleDividerItemDecoration)
         rvDashBoard.setHasFixedSize(true)
         rvDashBoard.layoutManager = GridLayoutManager(this, 3)
-
     }
 
     private fun onHomeOptionSelected(position: Int) {
@@ -63,41 +58,39 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
             5 -> activityClass = TodoActivity::class.java
             else -> activityClass = UserProfileActivity::class.java
         }
-
-        if (activityClass==null){
-            return
-        }
-
         val intent = Intent(this, activityClass)
         startActivity(intent)
     }
 
-    private fun getOptionList(): List<HomeOption> {
-        val list: ArrayList<HomeOption> = ArrayList<HomeOption>()
-
-        val arrayListOf = arrayListOf("users", "posts", "comments", "albums", "photos", "todos");
-        val iconList = arrayListOf(
-            R.string.ic_user,
-            R.string.ic_local_post_office,
-            R.string.ic_comment,
-            R.string.ic_photo_album,
-            R.string.ic_photo,
-            R.string.ic_calendar_check_o
-        );
-
-//        val classList = arrayListOf(
-//            UserProfileActivity::class.java,
-//            PostActivity::class.java,
-//            CommentsActivity::class.java,
-//            AlbumsActivity::class.java,
-//            PhotosActivity::class.java,
-//            TodoActivity::class.java
-//        );
-        arrayListOf.forEachIndexed() { index, sValue ->
-            val homeOptions = HomeOption(sValue, iconList[index], "\\$sValue")
-            list.add(homeOptions)
-        }
-
-        return list;
+    override fun getDashBoardOption() {
+        viewModel.getDashBoardOption().observe(this, Observer { result ->
+            VResultHandler(this, result) {
+                setRecyclerViewData(
+                    result.data!!
+                )
+            }
+        }) //To change body of created functions use File | Settings | File Templates.
     }
+
 }
+
+/*
+ Knowledge gain
+
+
+        /*FOR MAKING DIVIDER SQUARE*/
+//        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+//        rvDashBoard.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+*
+*
+   /*  rvDashBoard.addItemDecoration(
+              GridSpacingItemDecoration(
+                  spanCount = 2,
+                  spacing = 2.px,
+                  includeEdge = true
+              )
+          )*/
+
+
+
+* */

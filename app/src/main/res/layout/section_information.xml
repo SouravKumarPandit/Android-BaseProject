@@ -23,22 +23,18 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_8sdp"
         android:paddingTop="@dimen/_10sdp"
-        android:paddingRight="@dimen/_8sdp"
         android:paddingBottom="@dimen/_10sdp">
 
         <com.vrlocal.android.baseproject.util.viewutils.fontutils.IconView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:layout_marginLeft="@dimen/_8sdp"
             android:text="@{titleIcon}"
 
-            android:textSize="@dimen/_18ssp" />
+            android:textSize="18sp" />
 
         <TextView
-            android:paddingBottom="@dimen/_4sdp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_8sdp"
@@ -50,15 +46,14 @@
 
         <TextView
             android:layout_width="0dp"
-            android:paddingBottom="@dimen/_4sdp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="@{userData}"
+            android:paddingBottom="@dimen/_4sdp"
             android:singleLine="false"
+            android:text="@{userData}"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold|italic"
-             />
+            android:textStyle="bold|italic" />
 
 
     </LinearLayout>

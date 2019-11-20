@@ -33,6 +33,8 @@
     <string name="address">Address</string>
     <string name="email">Email</string>
     <string name="logout">Logout</string>
+    <string name="browse_by_category">Browse by category</string>
+    <string name="posts">User Posts</string>
 
 
 </resources>

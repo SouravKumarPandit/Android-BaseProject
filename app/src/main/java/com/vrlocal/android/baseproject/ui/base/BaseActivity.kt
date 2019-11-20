@@ -34,15 +34,12 @@ import io.fabric.sdk.android.Fabric
 abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     DaggerAppCompatActivity(), IView {
     private var doubleBackToExitPressedOnce = false
-    private var darkStatusBar = false
-    open lateinit var bindingData: B
+    open val transparentStatusBar = false
+    lateinit var bindingData: B
     open lateinit var viewModel: T
     private lateinit var mProgressBar: ProgressBar
     private lateinit var frameLayout: FrameLayout
 
-
-//    @Inject
-//    public lateinit var sessionManager: SessionManager
 
     protected fun bindView(layoutId: Int) {
         bindingData = DataBindingUtil.setContentView(this, layoutId)
@@ -54,14 +51,12 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         Fabric.with(this, Crashlytics())
 //        VPermissionUtils.requestAllPermissions(this)
 //        subscribeObservers()
-        if (darkStatusBar)
+        if (transparentStatusBar)
             makeStatusBarTransparent()
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-
-
     }
 
     /**warning:
@@ -157,9 +152,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
             }
 
             this.doubleBackToExitPressedOnce = true
-//        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
             showSnackBar("press BACK again to exit", 0)
-
             Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
 
 
@@ -267,9 +260,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
     }
 
-    protected fun setDarkStatusBar(isDark: Boolean) {
-        this.darkStatusBar = isDark
-    }
 
     override fun onResponse(responseObject: Any?) {
 

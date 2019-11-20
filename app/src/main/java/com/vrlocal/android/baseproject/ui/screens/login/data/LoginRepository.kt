@@ -1,7 +1,9 @@
 package com.vrlocal.android.baseproject.ui.screens.login.data
 
 import androidx.lifecycle.distinctUntilChanged
+import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.data.*
+import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -38,5 +40,39 @@ class LoginRepository @Inject constructor(
         dao.removeUser()
         return VResult.success(true)
     }
+
+    fun getHomeOptionList()=
+        backgroundLiveData(backgroundCallback = { generateHomeOptionList() }).distinctUntilChanged()
+
+    private fun generateHomeOptionList(): VResult<List<HomeOption>>{
+
+        val list: ArrayList<HomeOption> = ArrayList<HomeOption>()
+
+        val arrayListOf = arrayListOf("users", "posts", "comments", "albums", "photos", "todos");
+        val iconList = arrayListOf(
+            R.string.ic_user,
+            R.string.ic_local_post_office,
+            R.string.ic_comment,
+            R.string.ic_photo_album,
+            R.string.ic_photo,
+            R.string.ic_calendar_check_o
+        );
+
+//        val classList = arrayListOf(
+//            UserProfileActivity::class.java,
+//            PostActivity::class.java,
+//            CommentsActivity::class.java,
+//            AlbumsActivity::class.java,
+//            PhotosActivity::class.java,
+//            TodoActivity::class.java
+//        );
+        arrayListOf.forEachIndexed() { index, sValue ->
+            val homeOptions = HomeOption(sValue, iconList[index], "\\$sValue")
+            list.add(homeOptions)
+        }
+
+        return VResult.success(list);
+    }
+
 
 }

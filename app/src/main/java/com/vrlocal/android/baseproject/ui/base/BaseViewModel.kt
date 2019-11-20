@@ -25,4 +25,5 @@ open class BaseViewModel<T : IView> :ViewModel(){
     fun detachView() {
         this.view = null
     }
+
 }
