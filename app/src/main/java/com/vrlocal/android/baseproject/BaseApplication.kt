@@ -7,7 +7,7 @@ import com.vrlocal.android.baseproject.util.CrashReportingTree
 import dagger.android.AndroidInjector
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
-/*testing commit*/
+/*testing commit  other di test*/
 class BaseApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
 
