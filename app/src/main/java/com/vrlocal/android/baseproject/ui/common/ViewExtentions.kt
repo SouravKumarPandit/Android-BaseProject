@@ -6,6 +6,10 @@ import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import com.vrlocal.uicontrolmodule.common.VUtil
+
+
+
 
 
 fun Activity.makeStatusBarTransparent() {
@@ -24,6 +28,7 @@ fun Activity.makeStatusBarTransparent() {
     }
 }
 
+
 fun Activity.makeStatusBarDarkTransparent() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window.apply {
@@ -39,6 +44,8 @@ fun Activity.makeStatusBarDarkTransparent() {
         }
     }
 }
+//fun  Activity.showToast()
+
 /*
 fun Activity.dp(value: Int): Int {
     return (value / Resources.getSystem().displayMetrics.density).toInt()
@@ -47,9 +54,16 @@ fun Activity.px(value: Int): Int {
     return (value * Resources.getSystem().displayMetrics.density).toInt()
 }*/
 
+//------------------------------------------view  -------------------------------------------------------------------
 
 fun View.setMarginTop(marginTop: Int) {
     val menuLayoutParams = this.layoutParams as ViewGroup.MarginLayoutParams
     menuLayoutParams.setMargins(0, marginTop, 0, 0)
     this.layoutParams = menuLayoutParams
+}
+fun View.setClickListenerBackground(){
+    this.background = VUtil.getDrawableListState(
+        VUtil.getRoundDrawable(Color.TRANSPARENT, 8f),
+        VUtil.getRoundDrawable(0x9000000, 8f)
+    )
 }

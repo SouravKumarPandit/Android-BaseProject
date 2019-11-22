@@ -1,5 +1,7 @@
 package com.vrlocal.android.baseproject.di.module
 
+import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
+import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
 import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
 import com.vrlocal.android.baseproject.ui.screens.home.SplashActivity
 import com.vrlocal.android.baseproject.ui.screens.home.old.LegoMainActivity
@@ -32,6 +34,13 @@ abstract class ActivityBuilderModule {
     @ContributesAndroidInjector()
     abstract fun contributePostActivity(): PostActivity
 
+
+    @ContributesAndroidInjector()
+    abstract fun contributeCommentsActivity(): CommentsActivity
+
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAlbumsActivity(): AlbumsActivity
 
 //    @ContributesAndroidInjector(modules = [AuthViewModelsModule::class, LoginModule::class])
 //    abstract fun contributeAuthActivity(): LoginActivity

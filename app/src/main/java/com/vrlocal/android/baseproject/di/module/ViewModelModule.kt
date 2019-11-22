@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vrlocal.android.baseproject.di.component.ViewModelFactory
 import com.vrlocal.android.baseproject.di.scope.ViewModelKey
+import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsViewModel
+import com.vrlocal.android.baseproject.ui.screens.comments.CommentsViewModel
 import com.vrlocal.android.baseproject.ui.screens.home.HomeViewModel
 import com.vrlocal.android.baseproject.ui.screens.home.SplashViewModel
 import com.vrlocal.android.baseproject.ui.screens.home.old.MainViewModel
@@ -48,6 +50,18 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PostViewModel::class)
     abstract fun bindPostViewModel(viewModel: PostViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CommentsViewModel::class)
+    abstract fun bindCommentViewModel(viewModel: CommentsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AlbumsViewModel::class)
+    abstract fun bindAlbumsViewModel(viewModel: AlbumsViewModel): ViewModel
+
+
 
 
 

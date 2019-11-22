@@ -1,5 +1,7 @@
 package com.vrlocal.android.baseproject.api
 
+import com.vrlocal.android.baseproject.ui.screens.alubums.data.Albums
+import com.vrlocal.android.baseproject.ui.screens.comments.data.Comments
 import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
 import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoTheme
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
@@ -41,4 +43,12 @@ interface AppApiService {
 
     @GET("posts")
     suspend fun getPosts(): Response<Posts>
+
+
+    @GET("comments")
+    suspend fun getComments(): Response<Comments>
+
+
+    @GET("albums")
+    suspend fun getAlbums(): Response<Albums>
 }

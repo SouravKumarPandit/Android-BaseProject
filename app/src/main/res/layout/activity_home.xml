@@ -104,7 +104,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_15sdp"
-                android:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/ic_share"
                 app:layout_anchor="@id/appBar"
                 app:layout_anchorGravity="bottom|end" />

@@ -1,5 +1,7 @@
 package com.vrlocal.android.baseproject.ui.common
 
+import android.R
+import android.content.Context
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +10,7 @@ import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -47,5 +50,30 @@ fun bindRenderHtml(view: TextView, description: String?) {
     } else {
         view.text = ""
     }
+}
+
+@BindingAdapter("imageResource")
+fun setImageResource(view: ImageView, imageUrl: Int) {
+    val context: Context = view.context
+    val option: RequestOptions = RequestOptions()
+        .placeholder(R.drawable.ic_menu_gallery)
+        .error(R.drawable.ic_menu_gallery)
+    Glide.with(context)
+        .setDefaultRequestOptions(option)
+        .load(imageUrl)
+        .into(view)
+}
+
+
+@BindingAdapter("imageResource")
+fun setImageResource(view: ImageView, imageUrl: String?) {
+    val context: Context = view.context
+    val option: RequestOptions = RequestOptions()
+        .placeholder(R.drawable.ic_menu_gallery)
+        .error(R.drawable.ic_menu_gallery)
+    Glide.with(context)
+        .setDefaultRequestOptions(option)
+        .load(imageUrl)
+        .into(view)
 }
 

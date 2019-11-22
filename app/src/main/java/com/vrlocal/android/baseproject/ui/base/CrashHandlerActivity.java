@@ -114,21 +114,18 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
 
         new ContextThemeWrapper(alertDialog.getContext(), android.R.style.Theme_Dialog);
 
-        alertDialog.showDialog(true, true, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface clDialog, int iButtonId) {
+        alertDialog.showDialog(true, true, (clDialog, iButtonId) -> {
 
-                if (iButtonId == DialogInterface.BUTTON_POSITIVE) {
-                    clMainLayout.setVisibility(View.VISIBLE);
-                    clDialog.cancel();
-                } else {
-                    startMainActiviy();
-					 System.exit(10);
-                    clDialog.cancel();
-                }
-
-
+            if (iButtonId == DialogInterface.BUTTON_POSITIVE) {
+                clMainLayout.setVisibility(View.VISIBLE);
+                clDialog.cancel();
+            } else {
+                startMainActiviy();
+                 System.exit(10);
+                clDialog.cancel();
             }
+
+
         });
     }
 

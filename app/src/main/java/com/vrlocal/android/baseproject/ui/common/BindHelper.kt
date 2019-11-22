@@ -1,32 +1,33 @@
 package com.vrlocal.android.baseproject.ui.common
 
-import android.graphics.drawable.Drawable
-import android.widget.TextView
-import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.util.viewutils.fontutils.IconFontDrawable
+import java.math.BigDecimal
+import java.text.DecimalFormat
+
 
 class BindHelper {
 
-    object Instence{
-        @JvmStatic
-        fun fontDrawable(view: TextView, stringResource: Int): Drawable {
-            return IconFontDrawable(view.context, stringResource)
-
-        }
-
-        @JvmStatic
-        fun bindLabel(view: TextView, stringResource: Int): String {
-            return view.context.resources.getString(R.string.app_name)
-        }
+    fun bindString(stringLabel: String="", stringContent: String= ""):String{
+        return "$stringLabel $stringContent"
     }
 
+    fun getQuantityString(quantity: Int): String? {
+        return "Qty: $quantity"
+    }
 
+    fun getValue(value: BigDecimal?): String? {
+        val df = DecimalFormat("###,###,###.00")
+        return java.lang.String.valueOf(df.format(value))
+    }
 
-//    @BindingAdapter("iconDrawable")
+    fun getFloat(value: BigDecimal): Float {
+        return value.toFloat()
+    }
 
-
-//    @BindingAdapter("labelResource")
-
-
+    companion object {
+        @JvmStatic
+        fun convertIntToString(value: Long): String? {
+            return "($value)"
+        }
+    }
 
 }

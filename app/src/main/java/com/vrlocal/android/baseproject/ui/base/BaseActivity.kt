@@ -7,7 +7,6 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.os.PersistableBundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -53,11 +52,10 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 //        subscribeObservers()
         if (transparentStatusBar)
             makeStatusBarTransparent()
+//        window.navigationBarColor = Color.RED;
+//        window.navigationBarDividerColor=
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-    }
 
     /**warning:
      * The root of the activity container must be of type ConstraintLayout
@@ -90,7 +88,8 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         constraintLayout.fitsSystemWindows = true
-        super.setContentView(view, params)
+
+        super.setContentView(constraintLayout, params)
         removeStatusBarPadding(constraintLayout)
 
 

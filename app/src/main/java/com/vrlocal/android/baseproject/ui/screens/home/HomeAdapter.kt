@@ -1,6 +1,5 @@
 package com.vrlocal.android.baseproject.ui.screens.home
 
-import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.BR
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.databinding.AdapterHomeBinding
+import com.vrlocal.android.baseproject.ui.common.setClickListenerBackground
 import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
 import com.vrlocal.uicontrolmodule.common.VUtil
 import kotlinx.android.synthetic.main.adapter_home.view.*
@@ -24,10 +24,7 @@ class HomeAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding: AdapterHomeBinding =
             AdapterHomeBinding.inflate(layoutInflater, parent, false)
-        itemBinding.root.cvOptionCard.background = VUtil.getDrawableListState(
-            VUtil.getRoundDrawable(Color.TRANSPARENT, 8f),
-            VUtil.getRoundDrawable(0x9000000, 8f)
-        )
+        itemBinding.root.cvOptionCard.setClickListenerBackground()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             itemBinding.root.iconService.setTextColor(
                 VUtil.getColorStateListDrawable(
