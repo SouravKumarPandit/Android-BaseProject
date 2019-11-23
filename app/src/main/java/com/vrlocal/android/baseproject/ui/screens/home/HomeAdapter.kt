@@ -1,5 +1,7 @@
 package com.vrlocal.android.baseproject.ui.screens.home
 
+import android.app.Application
+import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,11 +17,13 @@ import kotlinx.android.synthetic.main.adapter_home.view.*
 
 
 class HomeAdapter(
-    val context: HomeActivity,
+    val context: Context,
     private val optionList: List<HomeOption>,
     private val clickedListener: (adapterPosition: Int) -> Unit
 ) :
     RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding: AdapterHomeBinding =

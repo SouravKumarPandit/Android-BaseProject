@@ -1,49 +1,72 @@
 package com.vrlocal.android.baseproject.di.module
 
+import com.vrlocal.android.baseproject.di.module.albums.AlbumsModule
+import com.vrlocal.android.baseproject.di.module.albums.AlbumsViewModule
+import com.vrlocal.android.baseproject.di.module.comments.CommentsActivityScope
+import com.vrlocal.android.baseproject.di.module.comments.CommentsModule
+import com.vrlocal.android.baseproject.di.module.comments.CommentsViewModule
+import com.vrlocal.android.baseproject.di.module.home.HomeActivityScope
+import com.vrlocal.android.baseproject.di.module.home.HomeFragmentBuildersModule
+import com.vrlocal.android.baseproject.di.module.home.HomeModule
+import com.vrlocal.android.baseproject.di.module.home.HomeViewModelModule
+import com.vrlocal.android.baseproject.di.module.login.LoginActivityScope
+import com.vrlocal.android.baseproject.di.module.login.LoginModule
+import com.vrlocal.android.baseproject.di.module.login.LoginViewModule
+import com.vrlocal.android.baseproject.di.module.posts.PostActivityScope
+import com.vrlocal.android.baseproject.di.module.posts.PostsModule
+import com.vrlocal.android.baseproject.di.module.posts.PostsViewModule
+import com.vrlocal.android.baseproject.di.module.profile.ProfileModule
+import com.vrlocal.android.baseproject.di.module.profile.ProfileViewModule
 import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
 import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
-import com.vrlocal.android.baseproject.ui.screens.home.SplashActivity
-import com.vrlocal.android.baseproject.ui.screens.home.old.LegoMainActivity
 import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
+import com.vrlocal.android.baseproject.ui.screens.login.SplashActivity
 import com.vrlocal.android.baseproject.ui.screens.posts.PostActivity
 import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Suppress("unused")
 @Module(includes = [ViewModelModule::class])
 abstract class ActivityBuilderModule {
 
 
-    @ContributesAndroidInjector(modules = [HomeFragmentModule::class])
-    abstract fun contributeMainActivity(): LegoMainActivity
 
-    @ContributesAndroidInjector()
+    @LoginActivityScope
+    @ContributesAndroidInjector(modules = [LoginModule::class,LoginViewModule::class])
     abstract fun contributeSplashActivity(): SplashActivity
 
-    @ContributesAndroidInjector()
+    @LoginActivityScope
+    @ContributesAndroidInjector(modules = [LoginModule::class,LoginViewModule::class])
     abstract fun contributeLoginActivity(): LoginActivity
 
-    @ContributesAndroidInjector()
+    @HomeActivityScope
+    @ContributesAndroidInjector(modules = [HomeFragmentBuildersModule::class, HomeModule::class, HomeViewModelModule::class])
     abstract fun contributeHomeActivity(): HomeActivity
 
-    @ContributesAndroidInjector()
-    abstract fun contributeUserProfileActivity(): UserProfileActivity
 
-    @ContributesAndroidInjector()
+    @PostActivityScope
+    @ContributesAndroidInjector(modules = [PostsModule::class,PostsViewModule::class])
     abstract fun contributePostActivity(): PostActivity
 
 
-    @ContributesAndroidInjector()
+    @CommentsActivityScope
+    @ContributesAndroidInjector(modules = [CommentsModule::class,CommentsViewModule::class])
     abstract fun contributeCommentsActivity(): CommentsActivity
 
-
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = [AlbumsModule::class,AlbumsViewModule::class])
     abstract fun contributeAlbumsActivity(): AlbumsActivity
+
+
+    @ContributesAndroidInjector(modules = [ProfileModule::class,ProfileViewModule::class])
+    abstract fun contributeUserProfileActivity(): UserProfileActivity
+
+
+
 
 //    @ContributesAndroidInjector(modules = [AuthViewModelsModule::class, LoginModule::class])
 //    abstract fun contributeAuthActivity(): LoginActivity
+
 
 
 }

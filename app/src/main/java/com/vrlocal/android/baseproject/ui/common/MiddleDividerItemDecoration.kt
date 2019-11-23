@@ -69,9 +69,6 @@ class MiddleDividerItemDecoration
      * @param drawable Drawable that should be used as a divider.
      */
     fun setDrawable(drawable: Drawable) {
-        if (drawable == null) {
-            throw IllegalArgumentException("Drawable cannot be null.")
-        }
         mDivider = drawable
     }
 

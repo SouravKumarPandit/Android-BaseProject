@@ -34,15 +34,12 @@ class PostActivity : BaseActivity<ActivityListBinding, PostViewModel>(), ICommen
     private fun onGettingPosts(data: Posts?) {
 //        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
         rvListRecyclerView.adapter =
-            PostAdapter(this, data!!, clickedListener = { onPostSelected(it) })
+            PostAdapter(this, data!!, clickedListener = { /*todo*/ })
         rvListRecyclerView.setHasFixedSize(true)
         rvListRecyclerView.layoutManager = LinearLayoutManager(this)
 
 
     }
 
-    private fun onPostSelected(postId: Int) {
-
-    }
 }
 

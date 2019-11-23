@@ -56,6 +56,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             navHomeActivity()
     }
 
+    override fun validateUserSession(data: User?) {
+    }
+
     private fun navHomeActivity() {
 
         val intent = Intent(this, HomeActivity::class.java)

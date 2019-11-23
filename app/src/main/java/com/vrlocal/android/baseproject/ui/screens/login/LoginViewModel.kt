@@ -29,4 +29,11 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
     fun deleteUser()  = repository.deleteUser()
 //    fun getUserList() : Boolean = repository.deleteUser()
 
+//    ---------------------------------------splash screen------------------------------------------------
+
+    fun getLogeInUserData(): LiveData<VResult<User>> =
+        repository.authenticateDatabaseUser()
+
+
+
 }

@@ -8,10 +8,6 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSet
-import com.vrlocal.android.baseproject.ui.screens.legoset.data.LegoSetDao
-import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoTheme
-import com.vrlocal.android.baseproject.ui.screens.legotheme.data.LegoThemeDao
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import com.vrlocal.android.baseproject.util.VConstants
@@ -20,16 +16,10 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 /**
  * The Room database for this app
  */
-@Database(entities = [LegoTheme::class,
-    LegoSet::class,User::class],
+@Database(entities = [User::class],
         version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
     abstract class AppDatabase : RoomDatabase() {
-
-    abstract fun legoSetDao(): LegoSetDao
-
-    abstract fun legoThemeDao(): LegoThemeDao
-
     abstract fun userDao(): UserDao
 
 

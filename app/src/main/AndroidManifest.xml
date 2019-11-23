@@ -41,7 +41,7 @@
 
 
         <activity
-            android:name=".ui.screens.home.SplashActivity"
+            android:name=".ui.screens.login.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

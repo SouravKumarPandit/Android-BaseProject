@@ -72,10 +72,13 @@ class UserProfileActivity : BaseActivity<ActivityProfileBinding, UserProfileView
         return super.onOptionsItemSelected(item)
     }
 
-    private fun logoutCurrentUser(it: Boolean?) {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finishAffinity()
+    private fun logoutCurrentUser(logout: Boolean?) {
+        if (logout!!){
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
+        }
     }
 
 

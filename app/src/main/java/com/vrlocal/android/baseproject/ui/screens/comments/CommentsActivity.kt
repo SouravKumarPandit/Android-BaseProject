@@ -39,15 +39,12 @@ class CommentsActivity  : BaseActivity<ActivityListBinding,CommentsViewModel>() 
 //        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
         if (data != null) viewModel.comments=data;
         rvListRecyclerView.adapter =
-            CommentsAdapter(this, data!!, clickedListener = { onPostSelected(it) })
+            CommentsAdapter(this, data!!, clickedListener = { /*todo*/})
         rvListRecyclerView.setHasFixedSize(true)
         rvListRecyclerView.layoutManager = LinearLayoutManager(this)
 
 
     }
 
-    private fun onPostSelected(position: Int) {
-
-    }
 }
 
