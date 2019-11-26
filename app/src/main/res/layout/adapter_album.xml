@@ -9,7 +9,7 @@
 
         <variable
             name="album"
-            type="com.vrlocal.android.baseproject.ui.screens.alubums.data.Album" />
+            type="com.vrlocal.android.baseproject.ui.screens.albums.data.Album" />
 
     </data>
 

@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums.data
+package com.vrlocal.android.baseproject.ui.screens.albums.data
 
 import androidx.lifecycle.distinctUntilChanged
 import com.vrlocal.android.baseproject.data.networkLiveData

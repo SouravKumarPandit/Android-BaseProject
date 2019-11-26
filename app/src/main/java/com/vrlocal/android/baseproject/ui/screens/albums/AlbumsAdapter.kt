@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums
+package com.vrlocal.android.baseproject.ui.screens.albums
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.BR
 import com.vrlocal.android.baseproject.databinding.AdapterAlbumBinding
 import com.vrlocal.android.baseproject.ui.common.setClickListenerBackground
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.Album
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.Albums
+import com.vrlocal.android.baseproject.ui.screens.albums.data.Album
+import com.vrlocal.android.baseproject.ui.screens.albums.data.Albums
 
 class AlbumsAdapter(
     val context: Context,

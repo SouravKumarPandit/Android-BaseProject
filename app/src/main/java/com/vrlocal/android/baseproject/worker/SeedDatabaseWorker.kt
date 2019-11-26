@@ -20,7 +20,8 @@ class SeedDatabaseWorker(
 
             try {
                 applicationContext.assets.open(VConstants.DATA_FILENAME).use { inputStream ->
-                    JsonReader(inputStream.reader()).use { jsonReader ->
+                    JsonReader(inputStream.reader()).use { _ ->
+                        /*todo :seeding data from json file*/
 //                        val type = object : TypeToken<List<LegoSet>>() {}.type
 //                        val list: List<LegoSet> = Gson().fromJson(jsonReader, type)
 //                        AppDatabase.getInstance(applicationContext).legoSetDao().insertAll(list)

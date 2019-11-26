@@ -1,9 +1,6 @@
 package com.vrlocal.android.baseproject.api
 
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.Albums
-import com.vrlocal.android.baseproject.ui.screens.comments.data.Comments
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
-import com.vrlocal.android.baseproject.ui.screens.posts.data.Posts
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,7 +16,7 @@ interface AppApiService {
     suspend fun getUser(
         @Path("id") id: String
     ): Response<User>
-
+/*
     @GET("posts")
     suspend fun getPosts(): Response<Posts>
 
@@ -29,5 +26,5 @@ interface AppApiService {
 
 
     @GET("albums")
-    suspend fun getAlbums(): Response<Albums>
+    suspend fun getAlbums(): Response<Albums>*/
 }

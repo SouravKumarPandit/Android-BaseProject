@@ -11,7 +11,7 @@ import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityHomeBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.common.MiddleDividerItemDecoration
-import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
+import com.vrlocal.android.baseproject.ui.screens.albums.AlbumsActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
 import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
 import com.vrlocal.android.baseproject.ui.screens.photos.PhotosActivity

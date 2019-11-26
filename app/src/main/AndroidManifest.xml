@@ -35,7 +35,7 @@
         <activity android:name=".ui.screens.profile.UserProfileActivity" android:label="User Profile" />
         <activity android:name=".ui.screens.posts.PostActivity"  android:label="User Profile" />
         <activity android:name=".ui.screens.comments.CommentsActivity" android:label="Comments List" />
-        <activity android:name=".ui.screens.alubums.AlbumsActivity" android:label="Albums Art" />
+        <activity android:name=".ui.screens.albums.AlbumsActivity" android:label="Albums Art" />
         <activity android:name=".ui.screens.photos.PhotosActivity" android:label="Photos" />
         <activity android:name=".ui.screens.todo.TodoActivity" android:label="TODO list" />
 

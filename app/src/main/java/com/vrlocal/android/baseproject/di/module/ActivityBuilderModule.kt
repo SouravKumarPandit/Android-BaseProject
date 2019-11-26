@@ -17,7 +17,7 @@ import com.vrlocal.android.baseproject.di.module.posts.PostsModule
 import com.vrlocal.android.baseproject.di.module.posts.PostsViewModule
 import com.vrlocal.android.baseproject.di.module.profile.ProfileModule
 import com.vrlocal.android.baseproject.di.module.profile.ProfileViewModule
-import com.vrlocal.android.baseproject.ui.screens.alubums.AlbumsActivity
+import com.vrlocal.android.baseproject.ui.screens.albums.AlbumsActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
 import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
 import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity

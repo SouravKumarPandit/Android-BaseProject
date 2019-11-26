@@ -1,8 +1,8 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums
+package com.vrlocal.android.baseproject.ui.screens.albums
 
 import com.vrlocal.android.baseproject.ui.base.BaseViewModel
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.Albums
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.AlbumsRepository
+import com.vrlocal.android.baseproject.ui.screens.albums.data.Albums
+import com.vrlocal.android.baseproject.ui.screens.albums.data.AlbumsRepository
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import javax.inject.Inject
 

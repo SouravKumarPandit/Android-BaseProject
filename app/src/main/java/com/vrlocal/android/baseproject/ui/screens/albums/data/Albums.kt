@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums.data
+package com.vrlocal.android.baseproject.ui.screens.albums.data
 
 import com.google.gson.annotations.SerializedName
 

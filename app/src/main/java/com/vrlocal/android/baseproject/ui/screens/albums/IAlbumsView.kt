@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums
+package com.vrlocal.android.baseproject.ui.screens.albums
 
 import com.vrlocal.android.baseproject.ui.base.IView
 

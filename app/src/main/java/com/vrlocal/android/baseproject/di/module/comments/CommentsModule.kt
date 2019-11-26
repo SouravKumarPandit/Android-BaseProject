@@ -1,6 +1,6 @@
 package com.vrlocal.android.baseproject.di.module.comments
 
-import com.vrlocal.android.baseproject.api.AppApiService
+import com.vrlocal.android.baseproject.api.CommentsService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -11,7 +11,8 @@ object CommentsModule {
     @JvmStatic
     @CommentsActivityScope
     @Provides
-    fun provideAppApi(retrofit: Retrofit): AppApiService {
-        return retrofit.create(AppApiService::class.java)
+    fun provideCommentsService(retrofit: Retrofit): CommentsService {
+        return retrofit.create(CommentsService::class.java)
     }
+
 }

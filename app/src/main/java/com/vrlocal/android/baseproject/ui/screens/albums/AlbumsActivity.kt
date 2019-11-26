@@ -1,4 +1,4 @@
-package com.vrlocal.android.baseproject.ui.screens.alubums
+package com.vrlocal.android.baseproject.ui.screens.albums
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -8,7 +8,7 @@ import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityListBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
-import com.vrlocal.android.baseproject.ui.screens.alubums.data.Albums
+import com.vrlocal.android.baseproject.ui.screens.albums.data.Albums
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -37,11 +37,10 @@ class AlbumsActivity : BaseActivity<ActivityListBinding, AlbumsViewModel>(), IAl
     override fun fetchAlbumList() {
         viewModel.getAlbumList().observe(
             this,
-            Observer { result -> VResultHandler(this, result) { onGettingPosts(result.data) } })
+            Observer { result -> VResultHandler(this, result) { onGettingAlbumes(result.data) } })
     }
 
-    private fun onGettingPosts(data: Albums?) {
-//        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
+    private fun onGettingAlbumes(data: Albums?) {
         if (data != null) viewModel.albums = data;
         rvListRecyclerView.adapter =
             AlbumsAdapter(this, data!!, clickedListener = { onPostSelected(it) })

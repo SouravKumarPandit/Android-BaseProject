@@ -1,17 +1,17 @@
 package com.vrlocal.android.baseproject.di.module
 
 import android.app.Application
+import com.vrlocal.android.baseproject.api.AlbumsService
 import com.vrlocal.android.baseproject.api.AppApiService
 import com.vrlocal.android.baseproject.api.CommentsService
+import com.vrlocal.android.baseproject.api.PostsService
 import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.di.CoroutineScropeIO
-import com.vrlocal.android.baseproject.util.VConstants
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -46,31 +46,21 @@ class AppModule {
         converterFactory: GsonConverterFactory
     ) = provideService(okhttpClient, converterFactory, CommentsService::class.java)
 
-
-
-
+    @Singleton
+    @Provides
+    fun providePostsService(
+        okhttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory
+    ) = provideService(okhttpClient, converterFactory, PostsService::class.java)
 
 
     @Singleton
     @Provides
-    fun createRetrofit(
+    fun provideAlbumsService(
         okhttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
-    ): Retrofit {
+    ) = provideService(okhttpClient, converterFactory, AlbumsService::class.java)
 
-        return Retrofit.Builder()
-            .baseUrl(VConstants.BASE_URL)
-            .client(okhttpClient)
-            .addConverterFactory(converterFactory)
-            .build()
-    }
-
-    private fun <T> provideService(
-        okhttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory, clazz: Class<T>
-    ): T {
-        return createRetrofit(okhttpClient, converterFactory).create(clazz)
-    }
 
 
 }
