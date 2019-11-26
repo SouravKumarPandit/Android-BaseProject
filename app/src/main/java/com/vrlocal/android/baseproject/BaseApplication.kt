@@ -1,13 +1,13 @@
 package com.vrlocal.android.baseproject
 
 import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
 import com.vrlocal.android.baseproject.di.DaggerApplication
 import com.vrlocal.android.baseproject.di.component.DaggerAppComponent
 import com.vrlocal.android.baseproject.util.CrashReportingTree
 import dagger.android.AndroidInjector
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
-/*testing commit  other di test*/
 class BaseApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
 
@@ -20,11 +20,19 @@ class BaseApplication : DaggerApplication() {
 
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         else Timber.plant(CrashReportingTree())
-         val fabric = Fabric.Builder(this)
-             .kits(Crashlytics())
-             .debuggable(BuildConfig.DEBUG) // Enables Crashlytics debugger
-             .build()
-         Fabric.with(fabric)
+//         val fabric = Fabric.Builder(this)
+//             .kits(Crashlytics())
+//             .debuggable(BuildConfig.DEBUG) // Enables Crashlytics debugger
+//             .build()
+//         Fabric.with(fabric)
+        Crashlytics.Builder()
+            .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+            .build()
+            .also { crashlyticsKit ->
+                Fabric.with(this, crashlyticsKit)
+            }
+
+
 //        Thread.setDefaultUncaughtExceptionHandler(CLExceptionHandler(this));
     }
 }

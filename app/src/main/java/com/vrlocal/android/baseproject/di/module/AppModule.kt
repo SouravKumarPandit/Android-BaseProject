@@ -1,10 +1,7 @@
 package com.vrlocal.android.baseproject.di.module
 
 import android.app.Application
-import com.vrlocal.android.baseproject.api.AlbumsService
-import com.vrlocal.android.baseproject.api.AppApiService
-import com.vrlocal.android.baseproject.api.CommentsService
-import com.vrlocal.android.baseproject.api.PostsService
+import com.vrlocal.android.baseproject.api.*
 import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.di.CoroutineScropeIO
 import dagger.Module
@@ -17,7 +14,6 @@ import javax.inject.Singleton
 
 @Module(includes = [CoreDataModule::class, ActivityBuilderModule::class])
 class AppModule {
-
 
     @Singleton
     @Provides
@@ -61,6 +57,22 @@ class AppModule {
         converterFactory: GsonConverterFactory
     ) = provideService(okhttpClient, converterFactory, AlbumsService::class.java)
 
+
+    @Singleton
+    @Provides
+    fun providePhotosService(
+        okhttpClient: OkHttpClient,
+        converterFactory: GsonConverterFactory
+    ) = provideService(okhttpClient, converterFactory, PhotosService::class.java)
+
+    /*   @Singleton
+     @Provides
+     fun provideRetrofitInstance(): Retrofit? {
+         return Retrofit.Builder()
+             .baseUrl(VConstants.BASE_URL)
+             .addConverterFactory(GsonConverterFactory.create())
+             .build()
+     }*/
 
 
 }

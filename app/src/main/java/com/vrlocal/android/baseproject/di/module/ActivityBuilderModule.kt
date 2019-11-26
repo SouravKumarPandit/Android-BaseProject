@@ -12,6 +12,8 @@ import com.vrlocal.android.baseproject.di.module.home.HomeViewModelModule
 import com.vrlocal.android.baseproject.di.module.login.LoginActivityScope
 import com.vrlocal.android.baseproject.di.module.login.LoginModule
 import com.vrlocal.android.baseproject.di.module.login.LoginViewModule
+import com.vrlocal.android.baseproject.di.module.photos.PhotosModule
+import com.vrlocal.android.baseproject.di.module.photos.PhotosViewModule
 import com.vrlocal.android.baseproject.di.module.posts.PostActivityScope
 import com.vrlocal.android.baseproject.di.module.posts.PostsModule
 import com.vrlocal.android.baseproject.di.module.posts.PostsViewModule
@@ -22,6 +24,7 @@ import com.vrlocal.android.baseproject.ui.screens.comments.CommentsActivity
 import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
 import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
 import com.vrlocal.android.baseproject.ui.screens.login.SplashActivity
+import com.vrlocal.android.baseproject.ui.screens.photos.PhotosActivity
 import com.vrlocal.android.baseproject.ui.screens.posts.PostActivity
 import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileActivity
 import dagger.Module
@@ -61,6 +64,9 @@ abstract class ActivityBuilderModule {
     @ContributesAndroidInjector(modules = [ProfileModule::class,ProfileViewModule::class])
     abstract fun contributeUserProfileActivity(): UserProfileActivity
 
+
+    @ContributesAndroidInjector(modules = [PhotosModule::class, PhotosViewModule::class])
+    abstract fun contributePhotosActivity(): PhotosActivity
 
 
 
