@@ -27,7 +27,7 @@ import com.vrlocal.android.baseproject.ui.screens.profile.UserProfileActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(includes = [ViewModelModule::class])
+@Module()
 abstract class ActivityBuilderModule {
 
 
