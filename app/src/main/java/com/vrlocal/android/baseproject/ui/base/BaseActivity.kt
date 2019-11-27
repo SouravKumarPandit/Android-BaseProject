@@ -88,7 +88,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         constraintLayout.fitsSystemWindows = true
-
         super.setContentView(constraintLayout, params)
         removeStatusBarPadding(constraintLayout)
 
@@ -108,8 +107,8 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun onDestroy() {
-        viewModel.detachView()
         super.onDestroy()
+        viewModel.detachView()
     }
 
 
@@ -260,6 +259,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
 
+
     override fun onResponse(responseObject: Any?) {
 
     }
@@ -313,6 +313,5 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         snackBar.show()
 
     }
-
 
 }

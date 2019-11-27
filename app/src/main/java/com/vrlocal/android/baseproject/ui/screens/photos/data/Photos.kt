@@ -2,7 +2,7 @@ package com.vrlocal.android.baseproject.ui.screens.photos.data
 
 import com.google.gson.annotations.SerializedName
 
-typealias Photos = ArrayList<Photo>
+//typealias Photos = ArrayList<Photo>
 
 
 data class Photo(
@@ -16,4 +16,7 @@ data class Photo(
     val url: String,
     @SerializedName("thumbnailUrl")
     val thumbnailURL: String
-)
+){
+
+
+}

@@ -8,5 +8,12 @@ import javax.inject.Singleton
 @Singleton
 class PhotosRemoteDataSource @Inject constructor(private val service: PhotosService) : BaseDataSource() {
     suspend fun getPhotos()
-            = getResult { service.getPhotos() }
+            = getResult {
+
+        val photos = service.getPhotos()
+
+
+        return@getResult photos
+
+    }
 }

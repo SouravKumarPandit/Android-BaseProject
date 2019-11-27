@@ -2,13 +2,11 @@ package com.vrlocal.android.baseproject.ui.screens.photos
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.vrlocal.android.baseproject.R
 import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityListBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
-import com.vrlocal.android.baseproject.ui.screens.photos.data.Photos
-import kotlinx.android.synthetic.main.activity_list.*
+import com.vrlocal.android.baseproject.ui.screens.photos.data.Photo
 import javax.inject.Inject
 
 class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
@@ -21,16 +19,22 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        val paginationView:PaginationRecyclerView= PaginationRecyclerView(this)
+//        paginationView.setBackgroundColor(Color.LTGRAY)
+
+//        paginationView.setHolderListener(viewModel)
+//
+//        setContentView(paginationView)
         bindView(R.layout.activity_list)
         bindingData.title = "Photos List"
         loadPhotosList()
-        rvListRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-
+        /*
+         rvListRecyclerView.addItemDecoration(
+             DividerItemDecoration(
+                 this,
+                 DividerItemDecoration.VERTICAL
+             )
+         )*/
 
     }
 
@@ -42,7 +46,10 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
 
     }
 
-    private fun onGettingPhotos(data: Photos?) {
+    private fun onGettingPhotos(data: List<Photo>?) {
         showToast("got response")
+//        val adapter:PaginationAdapter = PaginationAdapter(this, this);
+//        rvListRecyclerView.adapter=adapter;
+
     }
 }

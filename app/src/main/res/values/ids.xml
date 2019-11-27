@@ -5,4 +5,11 @@
     <item name="sendLogButton" type="id" />
     <item name="closeButton" type="id" />
     <item name="square_constrain" type="id" />
+    <item name="main_swiperefresh" type="id" />
+    <item name="main_recycler" type="id" />
+    <item name="main_progress" type="id" />
+    <item name="loadmore_errorlayout" type="id" />
+    <item name="loadmore_errortxt" type="id" />
+    <item name="loadmore_retry" type="id" />
+    <item name="loadmore_progress" type="id" />
 </resources>
