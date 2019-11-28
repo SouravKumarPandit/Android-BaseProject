@@ -6,7 +6,6 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,12 +33,6 @@ class MiddleDividerItemDecoration
     init {
         val a = context.obtainStyledAttributes(ATTRS)
         mDivider = a.getDrawable(0)
-        if (mDivider == null) {
-            Log.w(
-                TAG,
-                "@android:attr/listDivider was not set in the theme used for this " + "DividerItemDecoration. Please set that attribute all call setDrawable()"
-            )
-        }
         a.recycle()
         setOrientation(orientation)
     }
@@ -179,7 +172,6 @@ class MiddleDividerItemDecoration
         //mainly used for GridLayoutManager
         val ALL = 2
 
-        private val TAG = "DividerItem"
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
     }
 }

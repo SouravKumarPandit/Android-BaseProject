@@ -1,7 +1,6 @@
 package com.vrlocal.android.baseproject.ui.base
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
@@ -48,10 +47,10 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Fabric.with(this, Crashlytics())
-//        VPermissionUtils.requestAllPermissions(this)
-//        subscribeObservers()
+        VPermissionUtils.requestAllPermissions(this)
         if (transparentStatusBar)
             makeStatusBarTransparent()
+//        subscribeObservers()
 //        window.navigationBarColor = Color.RED;
 //        window.navigationBarDividerColor=
     }
@@ -222,9 +221,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
     }
 
-    @TargetApi(23)
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
-
         if (requestCode == VPermissionUtils.PERMISSION_ALL) {
             VPermissionUtils.handlePermissionResult(
                 this@BaseActivity,
@@ -233,31 +230,20 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
                 grantResults
             )
         }
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
 
     }
 
 
-    @TargetApi(23)
-    public override
-            /**
-             * @param iRequestCode calling frag
-             * @param iStatus status
-             * @param data intent included bundle data
-             */
-
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VPermissionUtils.OVER_LAY_PERMISSION) {
             VPermissionUtils.handleOverlayPermissionResult(this@BaseActivity)
         } else {
             ViewUtils.hideKeyboard(this)
-
         }
-
     }
-
 
 
     override fun onResponse(responseObject: Any?) {
@@ -287,6 +273,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 //        }
         snackBar.setActionTextColor(Color.WHITE)
         snackBar.show()
+
 
     }
 
