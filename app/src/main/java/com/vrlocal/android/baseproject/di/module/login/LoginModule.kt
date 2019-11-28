@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.di.module.login
 
 import com.vrlocal.android.baseproject.api.AppApiService
+import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.ui.screens.login.data.LoginRemoteDataSource
 import com.vrlocal.android.baseproject.ui.screens.login.data.LoginRepository
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
@@ -10,6 +11,12 @@ import retrofit2.Retrofit
 
 @Module
 object LoginModule {
+
+
+    @JvmStatic
+    @LoginActivityScope
+    @Provides
+    fun provideUserDao(db: AppDatabase):UserDao = db.userDao()
 
     @JvmStatic
     @LoginActivityScope

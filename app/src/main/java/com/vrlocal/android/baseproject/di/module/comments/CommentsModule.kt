@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.di.module.comments
 
 import com.vrlocal.android.baseproject.api.CommentsService
+import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.ui.screens.comments.data.CommentRemoteDataSource
 import com.vrlocal.android.baseproject.ui.screens.comments.data.CommentsRepository
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
@@ -10,6 +11,12 @@ import retrofit2.Retrofit
 
 @Module
 object CommentsModule {
+
+    @JvmStatic
+    @CommentsActivityScope
+    @Provides
+    fun provideUserDao(db: AppDatabase):UserDao = db.userDao()
+
 
     @JvmStatic
     @CommentsActivityScope

@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.di.module.profile
 
 import com.vrlocal.android.baseproject.api.AppApiService
+import com.vrlocal.android.baseproject.data.AppDatabase
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import com.vrlocal.android.baseproject.ui.screens.profile.data.ProfileRepository
 import com.vrlocal.android.baseproject.ui.screens.profile.data.UserProfileRemoteDataSource
@@ -10,6 +11,12 @@ import retrofit2.Retrofit
 
 @Module
 object ProfileModule {
+
+    @JvmStatic
+    @ProfileActivityScope
+    @Provides
+    fun provideUserDao(db: AppDatabase):UserDao = db.userDao()
+
 
     @JvmStatic
     @ProfileActivityScope

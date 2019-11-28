@@ -65,9 +65,6 @@ class AppModule {
     fun provideDb(app: Application) = AppDatabase.getInstance(app)
 
 
-    @Singleton
-    @Provides
-    fun provideUserDao(db: AppDatabase) = db.userDao()
 
     @CoroutineScropeIO
     @Provides
