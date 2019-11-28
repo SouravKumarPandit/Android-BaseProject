@@ -1,12 +1,17 @@
 package com.vrlocal.android.baseproject.di.module.albums
 
 import com.vrlocal.android.baseproject.api.AlbumsService
+import com.vrlocal.android.baseproject.ui.screens.albums.data.AlbumsRemoteDataSource
+import com.vrlocal.android.baseproject.ui.screens.albums.data.AlbumsRepository
+import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 
 @Module
 object AlbumsModule {
+
+
 
 
     @JvmStatic
@@ -16,13 +21,16 @@ object AlbumsModule {
         return retrofit.create(AlbumsService::class.java)
     }
 
-
-    /*@JvmStatic
+    @JvmStatic
     @AlbumsActivityScope
     @Provides
-    fun provideAlbumsService(
-        okhttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory
-    ) = provideService(okhttpClient, converterFactory, AlbumsService::class.java)
-*/
+    fun provideAlbumsDataSource(appService: AlbumsService) =
+        AlbumsRemoteDataSource(appService)
+
+    @JvmStatic
+    @AlbumsActivityScope
+    @Provides
+    fun provideAlbumsRepository(dao: UserDao, dataSource: AlbumsRemoteDataSource) =
+        AlbumsRepository(dao, dataSource)
+
 }

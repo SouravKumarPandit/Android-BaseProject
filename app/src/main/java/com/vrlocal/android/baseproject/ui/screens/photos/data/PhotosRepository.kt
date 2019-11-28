@@ -15,6 +15,8 @@ class PhotosRepository @Inject constructor(
 ) {
 
     fun getListOfPhotos() =
-        networkLiveData(networkCall = { remoteSource.getPhotos() }).distinctUntilChanged()
+        networkLiveData(networkCall = {
+            remoteSource.getPhotos()
+        }).distinctUntilChanged()
 
 }

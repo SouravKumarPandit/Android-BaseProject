@@ -1,37 +1,65 @@
 package com.vrlocal.android.baseproject.di.module
 
-import com.google.gson.Gson
-import com.vrlocal.android.baseproject.BuildConfig
-import dagger.Module
-import dagger.Provides
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
-import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
-import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
-
 /**
  * Dagger module to provide core data functionality.
- */
-@Module
-class CoreDataModule {
-
-    @Provides
-    fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
-            OkHttpClient.Builder().addInterceptor(interceptor)
-                    .build()
-
-    @Provides
-    fun provideLoggingInterceptor() =
-            HttpLoggingInterceptor().apply { level = if (BuildConfig.DEBUG) BODY else NONE }
-
-    @Provides
-    @Singleton
-    fun provideGson(): Gson = Gson()
-
-    @Provides
-    @Singleton
-    fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory =
-            GsonConverterFactory.create(gson)
-}
+// */
+//@Module
+//class CoreDataModule {
+////    private val cacheSize = 10 * 1024 * 1024 // 10MB Cache size
+////        .toLong()
+//    // Build interceptor
+// /*   private val rewriteCacheController =
+//        label@ Interceptor { chain: Interceptor.Chain ->
+//            val originalResponse = chain.proceed(chain.request())
+//            if (VNetworkUtils.isAvailable()) {
+//                val maxAge = 60 // read from cache for 1 minute
+//                return@label originalResponse.newBuilder()
+//                    .header("Cache-Control", "public, max-age=$maxAge")
+//                    .build()
+//            } else {
+//                val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
+//                return@label originalResponse.newBuilder()
+//                    .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
+//                    .build()
+//            }
+//        }*/
+//
+//
+//    @Provides
+//    fun provideOkHttpClient(
+//        interceptor: HttpLoggingInterceptor,
+//        application: Application
+//    ): OkHttpClient {
+//      /*  val rewriteCacheController =  Interceptor { chain: Interceptor.Chain ->
+//            val originalResponse = chain.proceed(chain.request())
+//            if (VNetworkUtils.isAvailable()) {
+//                val maxAge = 60 // read from cache for 1 minute
+//                return@Interceptor originalResponse.newBuilder()
+//                    .header("Cache-Control", "public, max-age=$maxAge")
+//                    .build()
+//            } else {
+//                val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
+//                return@Interceptor originalResponse.newBuilder()
+//                    .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
+//                    .build()
+//            }
+//        }*/
+//        return OkHttpClient.Builder().addInterceptor(interceptor)
+////            .addNetworkInterceptor(rewriteCacheController)
+////            .cache(Cache(application.cacheDir, cacheSize))
+//            .build()
+//    }
+//
+//    @Provides
+//    fun provideLoggingInterceptor() =
+//        HttpLoggingInterceptor().apply { level = if (BuildConfig.DEBUG) BODY else NONE }
+//
+//    @Provides
+//    @Singleton
+//    fun provideGson(): Gson = Gson()
+//
+//    @Provides
+//    @Singleton
+//    fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory =
+//        GsonConverterFactory.create(gson)
+//}

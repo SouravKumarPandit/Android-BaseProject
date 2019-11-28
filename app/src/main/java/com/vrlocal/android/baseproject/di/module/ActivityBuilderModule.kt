@@ -1,5 +1,6 @@
 package com.vrlocal.android.baseproject.di.module
 
+import com.vrlocal.android.baseproject.di.module.albums.AlbumsActivityScope
 import com.vrlocal.android.baseproject.di.module.albums.AlbumsModule
 import com.vrlocal.android.baseproject.di.module.albums.AlbumsViewModule
 import com.vrlocal.android.baseproject.di.module.comments.CommentsActivityScope
@@ -12,11 +13,13 @@ import com.vrlocal.android.baseproject.di.module.home.HomeViewModelModule
 import com.vrlocal.android.baseproject.di.module.login.LoginActivityScope
 import com.vrlocal.android.baseproject.di.module.login.LoginModule
 import com.vrlocal.android.baseproject.di.module.login.LoginViewModule
+import com.vrlocal.android.baseproject.di.module.photos.PhotosActivityScope
 import com.vrlocal.android.baseproject.di.module.photos.PhotosModule
 import com.vrlocal.android.baseproject.di.module.photos.PhotosViewModule
 import com.vrlocal.android.baseproject.di.module.posts.PostActivityScope
 import com.vrlocal.android.baseproject.di.module.posts.PostsModule
 import com.vrlocal.android.baseproject.di.module.posts.PostsViewModule
+import com.vrlocal.android.baseproject.di.module.profile.ProfileActivityScope
 import com.vrlocal.android.baseproject.di.module.profile.ProfileModule
 import com.vrlocal.android.baseproject.di.module.profile.ProfileViewModule
 import com.vrlocal.android.baseproject.ui.screens.albums.AlbumsActivity
@@ -57,14 +60,17 @@ abstract class ActivityBuilderModule {
     @ContributesAndroidInjector(modules = [CommentsModule::class,CommentsViewModule::class])
     abstract fun contributeCommentsActivity(): CommentsActivity
 
+
+    @AlbumsActivityScope
     @ContributesAndroidInjector(modules = [AlbumsModule::class,AlbumsViewModule::class])
     abstract fun contributeAlbumsActivity(): AlbumsActivity
 
 
+    @ProfileActivityScope
     @ContributesAndroidInjector(modules = [ProfileModule::class,ProfileViewModule::class])
     abstract fun contributeUserProfileActivity(): UserProfileActivity
 
-
+    @PhotosActivityScope
     @ContributesAndroidInjector(modules = [PhotosModule::class, PhotosViewModule::class])
     abstract fun contributePhotosActivity(): PhotosActivity
 

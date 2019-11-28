@@ -21,22 +21,25 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"${api_developer_token}\""
 
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = ["room.incremental":"true"]
-//            }
-//        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental":"true"]
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled = true
         }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_12
+//        sourceCompatibility JavaVersion.VERSION_12
     }
     // work-runtime-ktx 2.1.0 and above now requires Java 8
 
@@ -152,7 +155,7 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics:$fire_analytics_version"
 
 
-    def crashlytic_version='2.10.1@aar'
+    def crashlytic_version='2.10.1'
 //    implementation "com.crashlytics.sdk.android:crashlytics:$crashlytic_version"
 
     implementation("com.crashlytics.sdk.android:crashlytics:$crashlytic_version") {
