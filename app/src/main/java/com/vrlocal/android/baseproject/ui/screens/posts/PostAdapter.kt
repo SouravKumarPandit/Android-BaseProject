@@ -8,11 +8,10 @@ import com.vrlocal.android.baseproject.BR
 import com.vrlocal.android.baseproject.databinding.AdapterPostsBinding
 import com.vrlocal.android.baseproject.ui.common.setClickListenerBackground
 import com.vrlocal.android.baseproject.ui.screens.posts.data.Post
-import com.vrlocal.android.baseproject.ui.screens.posts.data.Posts
 
 class PostAdapter(
     val context: PostActivity,
-    private val optionList: Posts,
+    private val optionList: List<Post>,
     private val clickedListener: (adapterPosition: Int) -> Unit
 ) :
     RecyclerView.Adapter<PostAdapter.ItemViewHolder>() {

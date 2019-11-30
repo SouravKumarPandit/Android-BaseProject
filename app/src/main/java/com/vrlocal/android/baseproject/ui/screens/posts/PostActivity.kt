@@ -8,7 +8,8 @@ import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityListBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.screens.comments.ICommentView
-import com.vrlocal.android.baseproject.ui.screens.posts.data.Posts
+import com.vrlocal.android.baseproject.ui.screens.posts.data.Post
+//import com.vrlocal.android.baseproject.ui.screens.posts.data.Posts
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -28,10 +29,10 @@ class PostActivity : BaseActivity<ActivityListBinding, PostViewModel>(), ICommen
     override fun onCommentsList() {
         viewModel.getUsersPosts().observe(
             this,
-            Observer { result -> VResultHandler(this, result) { onGettingPosts(result.data) } })
+            Observer { result -> VResultHandler(this, result) { onGettingPosts(result?.data) } })
     }
 
-    private fun onGettingPosts(data: Posts?) {
+    private fun onGettingPosts(data: List<Post>?) {
 //        Toast.makeText(this, "message", Toast.LENGTH_SHORT).show()
         rvListRecyclerView.adapter =
             PostAdapter(this, data!!, clickedListener = { /*todo*/ })

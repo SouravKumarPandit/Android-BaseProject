@@ -10,20 +10,23 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
+import com.vrlocal.android.baseproject.ui.screens.posts.data.Post
+import com.vrlocal.android.baseproject.ui.screens.posts.data.PostsDao
 import com.vrlocal.android.baseproject.util.VConstants
 import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
 
 /**
  * The Room database for this app
  */
-@Database(entities = [User::class],
-        version = 1, exportSchema = false)
+@Database(
+    entities = [User::class,Post::class],
+    version = 1, exportSchema = true
+)
 @TypeConverters(Converters::class)
-    abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
-
-
+    abstract fun postsDao(): PostsDao
 
     companion object {
 
@@ -41,14 +44,14 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, VConstants.DATABASE_NAME)
-                    .addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    })
-                    .build()
+                .addCallback(object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
+                        WorkManager.getInstance(context).enqueue(request)
+                    }
+                })
+                .build()
         }
     }
 }
