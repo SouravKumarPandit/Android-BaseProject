@@ -20,11 +20,6 @@ class BaseApplication : DaggerApplication() {
 
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         else Timber.plant(CrashReportingTree())
-//         val fabric = Fabric.Builder(this)
-//             .kits(Crashlytics())
-//             .debuggable(BuildConfig.DEBUG) // Enables Crashlytics debugger
-//             .build()
-//         Fabric.with(fabric)
         Crashlytics.Builder()
             .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
             .build()
@@ -32,7 +27,8 @@ class BaseApplication : DaggerApplication() {
                 Fabric.with(this, crashlyticsKit)
             }
 
-
 //        Thread.setDefaultUncaughtExceptionHandler(CLExceptionHandler(this));
     }
+
+
 }

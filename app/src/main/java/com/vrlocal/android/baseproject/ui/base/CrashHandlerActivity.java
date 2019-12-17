@@ -1,5 +1,6 @@
 package com.vrlocal.android.baseproject.ui.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
 
     private String sError = null;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +60,12 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         LinearLayout clButtonsLayout = new LinearLayout(this);
         clButtonsLayout.setOrientation(LinearLayout.HORIZONTAL);
         clButtonsLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        clButtonsLayout.setPadding(i5dp,i5dp,i5dp,i5dp);
+        clButtonsLayout.setPadding(i5dp, i5dp, i5dp, i5dp);
         Button btSendLog = new Button(this);
         btSendLog.setText("Report");
         btSendLog.setId(R.id.sendLogButton);
         btSendLog.setOnClickListener(this);
-        btSendLog.setBackground(VUtil.getRoundDrawableListState(0xFF2DB143,i20dp,0xFF1B882D,i20dp));
+        btSendLog.setBackground(VUtil.getRoundDrawableListState(0xFF2DB143, i20dp, 0xFF1B882D, i20dp));
         btSendLog.setTextColor(Color.WHITE);
 
 
@@ -71,7 +73,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         btClose.setText("Exit");
         btClose.setId(R.id.closeButton);
         btClose.setOnClickListener(this);
-        btClose.setBackground(VUtil.getRoundDrawableListState(0xFFF14949,i20dp,0xFFB11212,i20dp));
+        btClose.setBackground(VUtil.getRoundDrawableListState(0xFFF14949, i20dp, 0xFFB11212, i20dp));
         btClose.setTextColor(Color.WHITE);
 
 
@@ -89,7 +91,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         clMainLayout.setVisibility(View.GONE);
         clScrollView.addView(clErrorText);
         clMainLayout.addView(clScrollView);
-        CardView cardView=new CardView(this);
+        CardView cardView = new CardView(this);
         cardView.addView(clButtonsLayout);
         cardView.setElevation(8f);
         clMainLayout.addView(cardView);
@@ -100,7 +102,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
             sError = getIntent().getStringExtra("error");
             clErrorText.setText(sError);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                clErrorText.    setText(Html.fromHtml(sError, Html.FROM_HTML_MODE_COMPACT));
+                clErrorText.setText(Html.fromHtml(sError, Html.FROM_HTML_MODE_COMPACT));
             } else {
                 clErrorText.setText(Html.fromHtml(sError));
             }
@@ -120,8 +122,8 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
                 clMainLayout.setVisibility(View.VISIBLE);
                 clDialog.cancel();
             } else {
-                startMainActiviy();
-                 System.exit(10);
+                startMainActivity();
+                System.exit(10);
                 clDialog.cancel();
             }
 
@@ -134,7 +136,7 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         PackageInfo info = null;
         try {
             info = manager.getPackageInfo(this.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e2) {
+        } catch (PackageManager.NameNotFoundException ignored) {
         }
         String model = Build.MODEL;
         if (!model.startsWith(Build.MANUFACTURER))
@@ -143,8 +145,8 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
         // Make file name - file must be saved to external storage or it wont be readable by
         // the email app.
         String path = Environment.getExternalStorageDirectory() + "/" + "baseApp";
-        File file = null;
-        boolean success = false;
+        File file ;
+        boolean success ;
         String fullName = null;
         file = new File(Environment.getExternalStorageDirectory() + "/baseApp");
 
@@ -163,8 +165,9 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
             try {
                 // For Android 4.0 and earlier, you will get all app's log output, so filter it to
                 // mostly limit it to your app's output.  In later versions, the filtering isn't needed.
-                String cmd = (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) ?
-                        "logcat -d -v time MyApp:v dalvikvm:v System.err:v *:s" :
+                String cmd =
+//                        (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) ?
+//                        "logcat -d -v time MyApp:v dalvikvm:v System.err:v *:s" :
                         "logcat -d -v time";
 
                 // get input stream
@@ -191,12 +194,12 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
                 if (writer != null)
                     try {
                         writer.close();
-                    } catch (IOException e1) {
+                    } catch (IOException ignored) {
                     }
                 if (reader != null)
                     try {
                         reader.close();
-                    } catch (IOException e1) {
+                    } catch (IOException ignored) {
                     }
 
                 // You might want to write a failure message to the log here.
@@ -240,10 +243,10 @@ public class CrashHandlerActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        startMainActiviy();
+        startMainActivity();
     }
 
-    private void startMainActiviy() {
+    private void startMainActivity() {
         Intent clMainIntent = new Intent(this, LoginActivity.class);
         clMainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(clMainIntent);

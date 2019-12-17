@@ -6,7 +6,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PostRemoteDataSource @Inject constructor(private val service: PostsService) : BaseDataSource() {
-    suspend fun getUserPosts()
-            = getResult { service.getPosts() }
+class PostRemoteDataSource @Inject constructor(private val service: PostsService) :
+    BaseDataSource() {
+    suspend fun getUserPosts() = getResult { service.getPosts() }
+
+
+
 }

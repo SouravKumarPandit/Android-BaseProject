@@ -10,6 +10,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.vrlocal.android.baseproject.ui.screens.login.data.User
 import com.vrlocal.android.baseproject.ui.screens.login.data.UserDao
+import com.vrlocal.android.baseproject.ui.screens.photos.data.Photo
+import com.vrlocal.android.baseproject.ui.screens.photos.data.PhotosDao
 import com.vrlocal.android.baseproject.ui.screens.posts.data.Post
 import com.vrlocal.android.baseproject.ui.screens.posts.data.PostsDao
 import com.vrlocal.android.baseproject.util.VConstants
@@ -19,7 +21,7 @@ import com.vrlocal.android.baseproject.worker.SeedDatabaseWorker
  * The Room database for this app
  */
 @Database(
-    entities = [User::class,Post::class],
+    entities = [User::class,Post::class, Photo::class],
     version = 1, exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -27,6 +29,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     abstract fun postsDao(): PostsDao
+
+    abstract fun photoDao(): PhotosDao
 
     companion object {
 

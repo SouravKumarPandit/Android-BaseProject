@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="photo"
+            type="com.vrlocal.android.baseproject.ui.screens.photos.data.Photo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/postListTile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{clickListener}"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingRight="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:text="@{photo.title}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivArrowIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Heading" />
+
+        <ImageView
+            android:id="@+id/ivArrowIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/image"
+            android:minWidth="@dimen/_40sdp"
+            android:minHeight="@dimen/_40sdp"
+            android:scaleType="centerCrop"
+            app:imageFromUrl="@{photo.thumbnailURL}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
