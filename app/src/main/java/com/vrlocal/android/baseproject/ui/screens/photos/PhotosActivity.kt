@@ -3,18 +3,15 @@ package com.vrlocal.android.baseproject.ui.screens.photos
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.R
-import com.vrlocal.android.baseproject.api.VResultHandler
 import com.vrlocal.android.baseproject.databinding.ActivityListBinding
 import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.common.GridSpacingItemDecoration
 import com.vrlocal.android.baseproject.ui.common.VerticalItemDecoration
-import com.vrlocal.android.baseproject.ui.screens.photos.data.Photo
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -71,18 +68,7 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
         }
     }
 
-    private fun loadPhotosList() {
 
-        viewModel.getPhotos().observe(
-            this,
-            Observer { result -> VResultHandler(this, result) { onGettingPhotos(result.data) } })
-
-    }
-
-    private fun onGettingPhotos(data: List<Photo>?) {
-
-        showToast("got response")
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

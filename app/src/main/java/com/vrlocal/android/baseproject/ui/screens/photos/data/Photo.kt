@@ -19,7 +19,7 @@ data class Photo(
     val url: String,
     @SerializedName("thumbnailUrl")
     val thumbnailURL: String
-){
+) {
 
 
 }

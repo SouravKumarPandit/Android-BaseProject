@@ -3,15 +3,15 @@ package com.vrlocal.android.baseproject.ui.screens.photos
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import android.widget.Toast
+import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vrlocal.android.baseproject.databinding.AdapterPhotosBinding
-import com.vrlocal.android.baseproject.ui.screens.legoset.ui.LegoSetsFragmentDirections
+import com.vrlocal.android.baseproject.ui.base.BaseActivity
 import com.vrlocal.android.baseproject.ui.screens.photos.data.Photo
-
 
 
 class PhotosAdapter : PagedListAdapter<Photo, PhotosAdapter.ViewHolder>(PhotoDiffCallback()) {
@@ -22,36 +22,54 @@ class PhotosAdapter : PagedListAdapter<Photo, PhotosAdapter.ViewHolder>(PhotoDif
         val photo = getItem(position)
         photo?.let {
             holder.apply {
-                bind(createOnClickListener(photo.title), photo, isGridLayoutManager())
+                bind(createOnClickListener(photo.id), photo, isGridLayoutManager())
                 itemView.tag = photo
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(AdapterPhotosBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            AdapterPhotosBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
+        if (recyclerView.context is BaseActivity<*, *>) {
+            (recyclerView.context as BaseActivity<*, *>).showProgressBar()
+
+        }
     }
 
-    private fun createOnClickListener(id: String): View.OnClickListener {
+
+    private fun hideActivityProgressBar(pagedList: PagedList<Photo>) {
+
+        if (pagedList.size != 0 && recyclerView.context is BaseActivity<*, *>) {
+            (recyclerView.context as BaseActivity<*, *>).hideProgressBar()
+        }
+
+    }
+
+
+    private fun createOnClickListener(id: Long): View.OnClickListener {
         return View.OnClickListener {
-            val direction = LegoSetsFragmentDirections.actionToLegosetDetailFragment(id)
-            it.findNavController().navigate(direction)
+            Toast.makeText(it.context, "id $id", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun isGridLayoutManager() = recyclerView.layoutManager is GridLayoutManager
 
-    class ViewHolder(private val binding: AdapterPhotosBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: AdapterPhotosBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: Photo,
-                 isGridLayoutManager: Boolean) {
+        fun bind(
+            listener: View.OnClickListener, item: Photo,
+            isGridLayoutManager: Boolean
+        ) {
             binding.apply {
                 clickListener = listener
                 photo = item
@@ -60,6 +78,8 @@ class PhotosAdapter : PagedListAdapter<Photo, PhotosAdapter.ViewHolder>(PhotoDif
             }
         }
     }
+
+
 }
 
 private class PhotoDiffCallback : DiffUtil.ItemCallback<Photo>() {

@@ -4,7 +4,7 @@ import com.vrlocal.android.baseproject.api.BaseDataSource
 import com.vrlocal.android.baseproject.api.PhotosService
 
 class PhotosRemoteDataSource  constructor( val service: PhotosService) : BaseDataSource() {
-    suspend fun getPhotos()
+   /* suspend fun getPhotos()
             = getResult {
 
         val photos = service.getPhotos()
@@ -12,5 +12,5 @@ class PhotosRemoteDataSource  constructor( val service: PhotosService) : BaseDat
 
         return@getResult photos
 
-    }
+    }*/
 }

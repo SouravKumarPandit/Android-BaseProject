@@ -4,21 +4,14 @@ import com.vrlocal.android.baseproject.api.BaseDataSource
 import com.vrlocal.android.baseproject.api.PhotosService
 import javax.inject.Inject
 
-class PageListDataSource @Inject constructor(private val service: PhotosService) : BaseDataSource(){
-    suspend fun getPhotos()
-            = getResult {
-
-        val photos = service.getPhotos()
+class PageListDataSource @Inject constructor(private val service: PhotosService) :
+    BaseDataSource() {
 
 
-        return@getResult photos
-
+    suspend fun fetchSets(page: Int, pageSize: Int? = null, themeId: Int? = null) = getResult {
+        service.getSets()
     }
-
-    suspend fun fetchSets(page: Int, pageSize: Int? = null, themeId: Int? = null)
-            = getResult { service.getSets() }
 //            = getResult { service.getSets(page, pageSize, themeId, "-year") }
 
-    suspend fun fetchSet(id: String)
-            = getResult { service.getSet(id) }
+    suspend fun fetchSet(id: String) = getResult { service.getSet(id) }
 }

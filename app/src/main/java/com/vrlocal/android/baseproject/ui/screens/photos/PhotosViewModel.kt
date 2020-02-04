@@ -11,7 +11,7 @@ class PhotosViewModel @Inject constructor(
     private val repository: PhotosRepository,
     @CoroutineScropeIO private val ioCoroutineScope: CoroutineScope
 ) : BaseViewModel<ICommentView>() {
-    fun getPhotos() = repository.getListOfPhotos();
+//    fun getPhotos() = repository.getListOfPhotos();
 
 
     var connectivityAvailable: Boolean = false

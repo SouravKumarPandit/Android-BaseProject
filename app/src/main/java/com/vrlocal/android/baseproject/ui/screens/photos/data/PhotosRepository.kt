@@ -1,10 +1,8 @@
 package com.vrlocal.android.baseproject.ui.screens.login.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.vrlocal.android.baseproject.data.networkLiveData
 import com.vrlocal.android.baseproject.ui.common.paginationview.PageDataSourceFactory
 import com.vrlocal.android.baseproject.ui.common.paginationview.PageListDataSource
 import com.vrlocal.android.baseproject.ui.screens.photos.data.Photo
@@ -22,11 +20,6 @@ class PhotosRepository @Inject constructor(
     private val remoteSource: PageListDataSource
 ) {
 
-    fun getListOfPhotos() =
-        networkLiveData(networkCall = {
-
-            remoteSource.getPhotos()
-        }).distinctUntilChanged()
 
 
     fun observePagedSets(
