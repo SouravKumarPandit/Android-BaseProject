@@ -16,34 +16,29 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/postListTile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/_10sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingRight="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_5sdp">
+        android:layout_height="@dimen/_25sdp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{album.title}"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvPostContent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             tools:text="Heading" />
 
         <TextView
             android:id="@+id/tvPostContent"
-            android:layout_width="32dp"
-            android:layout_height="15dp"
+            android:layout_width="0dp"
+
+            android:layout_height="match_parent"
             android:ellipsize="end"
-            android:gravity="end"
+            android:gravity="center"
             android:maxLines="2"
             android:minLines="2"
             android:text="@{BindHelper.convertIntToString(album.id)}"
