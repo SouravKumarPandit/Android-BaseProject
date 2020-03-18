@@ -27,7 +27,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
         super.onCreate(savedInstanceState)
         this.bindView(R.layout.activity_login)
         viewModel.attachView(this)
-        btnLogin.setOnClickListener(LoginActivityListener())
+        applyDebouchingClickListener(btnLogin)
 
     }
 
@@ -71,30 +71,41 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             if (v!!.id == R.id.btnLogin) {
 
 
-                val userName = edtUserName.text.toString()
-                if (userName.isEmpty()) {
-                    edtUserName.error = "Please enter a valid  user name"
-                    edtUserName.requestFocus()
-                    val handler = Handler(Looper.getMainLooper())
-                    handler.postDelayed({ edtUserName.error = null }, 1500)
-                    return
-                }
-
-                viewModel.authenticateUser(userName).removeObservers(this@LoginActivity)
-                viewModel.authenticateUser(userName).observe(
-                    this@LoginActivity,
-                    Observer { result ->
-                        VResultHandler(
-                            this@LoginActivity,
-                            result
-                        ) { isValidUser(result.data) }
-                    })
-
             }
         }
 
     }
 
+    override fun onDebouncingClick(view: View) {
+        when (view.id){
+            R.id.btnLogin->{
+                loginUser()
+            }
 
+        }
+    }
+
+    private fun loginUser() {
+
+        val userName = edtUserName.text.toString()
+        if (userName.isEmpty()) {
+            edtUserName.error = "Please enter a valid  user name"
+            edtUserName.requestFocus()
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({ edtUserName.error = null }, 1500)
+            return
+        }
+
+        viewModel.authenticateUser(userName).removeObservers(this@LoginActivity)
+        viewModel.authenticateUser(userName).observe(
+            this@LoginActivity,
+            Observer { result ->
+                VResultHandler(
+                    this@LoginActivity,
+                    result
+                ) { isValidUser(result.data) }
+            })
+
+    }
 }
 

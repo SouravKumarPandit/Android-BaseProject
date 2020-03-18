@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.ui.screens.posts
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vrlocal.android.baseproject.R
@@ -40,6 +41,9 @@ class PostActivity : BaseActivity<ActivityListBinding, PostViewModel>(), ICommen
         rvListRecyclerView.layoutManager = LinearLayoutManager(this)
 
 
+    }
+
+    override fun onDebouncingClick(view: View) {
     }
 
 }

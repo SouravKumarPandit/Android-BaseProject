@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import dagger.android.support.DaggerFragment
 
-open class BaseFragment : DaggerFragment(), IView {
+abstract class BaseFragment : DaggerFragment(), IView {
 
 
     lateinit var fragmentView: View
@@ -86,7 +86,7 @@ open class BaseFragment : DaggerFragment(), IView {
     }
 
     fun Fragment.setTitle(title: String) {
-        (activity as AppCompatActivity).supportActionBar!!.title = title
+        (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
 

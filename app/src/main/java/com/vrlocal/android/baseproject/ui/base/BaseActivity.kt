@@ -24,6 +24,7 @@ import com.vrlocal.android.baseproject.ui.screens.home.HomeActivity
 import com.vrlocal.android.baseproject.ui.screens.login.LoginActivity
 import com.vrlocal.android.baseproject.util.viewutils.ViewUtils
 import com.vrlocal.uicontrolmodule.app.VPermissionUtils
+import com.vrlocal.uicontrolmodule.ui.VClickUtils
 import dagger.android.support.DaggerAppCompatActivity
 import io.fabric.sdk.android.Fabric
 
@@ -37,6 +38,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     open lateinit var viewModel: T
     private lateinit var mProgressBar: ProgressBar
     private lateinit var frameLayout: FrameLayout
+    private lateinit var constraintLayout: ConstraintLayout
 
 
     protected fun bindView(layoutId: Int) {
@@ -50,9 +52,8 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
         VPermissionUtils.requestAllPermissions(this)
         if (transparentStatusBar)
             makeStatusBarTransparent()
-//        subscribeObservers()
-//        window.navigationBarColor = Color.RED;
-//        window.navigationBarDividerColor=
+
+
     }
 
 
@@ -62,7 +63,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
      * */
     override fun setContentView(layoutResID: Int) {
 
-        val constraintLayout: ConstraintLayout =
+         constraintLayout=
             LayoutInflater.from(this).inflate(layoutResID, null) as ConstraintLayout
 
         val initFrame = initFrame()
@@ -73,7 +74,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun setContentView(view: View?) {
-        val constraintLayout = getConstraintLayout()
+         constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         constraintLayout.fitsSystemWindows = true
@@ -83,7 +84,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        val constraintLayout = getConstraintLayout()
+         constraintLayout = getConstraintLayout()
         constraintLayout.addView(view, 0)
         constraintLayout.addView(frameLayout, 1)
         constraintLayout.fitsSystemWindows = true
@@ -301,4 +302,15 @@ abstract class BaseActivity<B : ViewDataBinding, T : BaseViewModel<*>> :
 
     }
 
+    fun applyDebouchingClickListener(vararg views: View?) {
+        VClickUtils.applyGlobalDebouncing(views, mClickListener)
+        VClickUtils.applyScale(*views)
+    }
+
+     override fun onDebouncingClick(view: View){
+    /*you can write logic to handle click listener her of floating view or view inside constraintLayout*/
+    }
+
+    private val mClickListener =
+        View.OnClickListener { v -> onDebouncingClick(v) }
 }

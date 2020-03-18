@@ -12,25 +12,24 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/postListTile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/_8sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingRight="@dimen/_8sdp"
-        android:id="@+id/postListTile"
-        android:paddingBottom="@dimen/_5sdp">
+        android:padding="@dimen/_5sdp"
+        >
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:maxLines="1"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{post.title}"
             android:textSize="16sp"
-            android:ellipsize="end"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvPostContent"
             app:layout_constraintEnd_toStartOf="@+id/ivArrowIcon"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Heading" />
@@ -41,10 +40,13 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="3"
+            android:minLines="3"
+
             android:text="@{post.body}"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="posts" />
@@ -53,18 +55,20 @@
             android:id="@+id/ivArrowIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_35sdp"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
             android:shadowColor="#60000000"
             android:shadowDx="-5"
             android:shadowDy="5"
             android:shadowRadius="10"
+            android:text="@string/ic_angle_right"
+            android:textSize="@dimen/_35sdp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textStyle="bold"
-            android:text="@string/ic_angle_right">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent">
 
         </com.vrlocal.android.baseproject.util.viewutils.fontutils.FontIconView>
     </androidx.constraintlayout.widget.ConstraintLayout>

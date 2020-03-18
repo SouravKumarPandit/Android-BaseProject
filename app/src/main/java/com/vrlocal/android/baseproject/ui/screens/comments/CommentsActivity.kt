@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.ui.screens.comments
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +44,10 @@ class CommentsActivity  : BaseActivity<ActivityListBinding,CommentsViewModel>() 
         rvListRecyclerView.setHasFixedSize(true)
         rvListRecyclerView.layoutManager = LinearLayoutManager(this)
 
+
+    }
+
+    override fun onDebouncingClick(view: View) {
 
     }
 

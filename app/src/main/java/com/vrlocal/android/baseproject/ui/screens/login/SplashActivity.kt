@@ -80,4 +80,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, LoginViewModel>(),
 //        super.showError(error)
         validateUserSession(null)
     }
+
+    override fun onDebouncingClick(view: View) {
+
+    }
 }

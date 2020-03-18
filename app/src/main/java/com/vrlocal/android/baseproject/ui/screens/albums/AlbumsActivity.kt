@@ -1,6 +1,7 @@
 package com.vrlocal.android.baseproject.ui.screens.albums
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,5 +52,9 @@ class AlbumsActivity : BaseActivity<ActivityListBinding, AlbumsViewModel>(), IAl
 
     private fun onPostSelected(position: Int) {
         showToast("clicked $position")
+    }
+
+    override fun onDebouncingClick(view: View) {
+        TODO("Not yet implemented")
     }
 }

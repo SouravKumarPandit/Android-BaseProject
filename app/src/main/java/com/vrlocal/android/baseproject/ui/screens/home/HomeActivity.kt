@@ -3,6 +3,7 @@ package com.vrlocal.android.baseproject.ui.screens.home
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -70,6 +71,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), IHomeVi
                 )
             }
         }) //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onDebouncingClick(view: View) {
     }
 
 }

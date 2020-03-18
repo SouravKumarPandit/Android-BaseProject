@@ -8,6 +8,7 @@ import com.vrlocal.android.baseproject.BR
 import com.vrlocal.android.baseproject.databinding.AdapterPostsBinding
 import com.vrlocal.android.baseproject.ui.common.setClickListenerBackground
 import com.vrlocal.android.baseproject.ui.screens.posts.data.Post
+import com.vrlocal.uicontrolmodule.ui.VClickUtils
 
 class PostAdapter(
     val context: PostActivity,
@@ -19,6 +20,7 @@ class PostAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding: AdapterPostsBinding =
             AdapterPostsBinding.inflate(layoutInflater, parent, false)
+        VClickUtils.applyScale(itemBinding.root)
 
         return ItemViewHolder(itemBinding)
 

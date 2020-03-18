@@ -3,6 +3,7 @@ package com.vrlocal.android.baseproject.ui.screens.photos
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,8 +70,6 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
     }
 
 
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
 
@@ -103,13 +102,13 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
     }
 
     private fun setLayoutManager() {
-        var scrollPosition = 0
+        /*var scrollPosition = 0
         // If a layout manager has already been set, get current scroll position.
         if (rvListRecyclerView.layoutManager != null) {
             scrollPosition = (rvListRecyclerView.layoutManager as LinearLayoutManager)
                 .findFirstCompletelyVisibleItemPosition()
         }
-
+        */
         if (isLinearLayoutManager) {
             rvListRecyclerView.removeItemDecoration(gridDecoration)
             rvListRecyclerView.addItemDecoration(linearDecoration)
@@ -121,5 +120,8 @@ class PhotosActivity : BaseActivity<ActivityListBinding, PhotosViewModel>() {
         }
 
 
+    }
+
+    override fun onDebouncingClick(view: View) {
     }
 } 

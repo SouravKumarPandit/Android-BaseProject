@@ -13,6 +13,7 @@ import com.vrlocal.android.baseproject.databinding.AdapterHomeBinding
 import com.vrlocal.android.baseproject.ui.common.setClickListenerBackground
 import com.vrlocal.android.baseproject.ui.screens.home.data.HomeOption
 import com.vrlocal.uicontrolmodule.common.VUtil
+import com.vrlocal.uicontrolmodule.ui.VClickUtils
 import kotlinx.android.synthetic.main.adapter_home.view.*
 
 
@@ -29,6 +30,7 @@ class HomeAdapter(
         val itemBinding: AdapterHomeBinding =
             AdapterHomeBinding.inflate(layoutInflater, parent, false)
         itemBinding.root.cvOptionCard.setClickListenerBackground()
+        VClickUtils.applyScale(itemBinding.root.cvOptionCard)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             itemBinding.root.iconService.setTextColor(
                 VUtil.getColorStateListDrawable(
@@ -69,6 +71,7 @@ class HomeAdapter(
 
         init {
             cvOptionCard.setOnClickListener { _ ->
+
                 clickedListener(adapterPosition)
             }
         }

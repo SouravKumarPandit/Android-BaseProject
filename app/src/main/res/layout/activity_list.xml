@@ -38,8 +38,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:paddingBottom="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
