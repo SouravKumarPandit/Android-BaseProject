@@ -29,7 +29,7 @@ fun <T, A> resultLiveData(
         if (responseStatus.status == SUCCESS) {
             saveCallResult(responseStatus.data!!)
         } else if (responseStatus.status == ERROR) {
-            emit(VResult.error<T>(responseStatus.message!!))
+            emit(VResult.error<T>(responseStatus.message!!,null))
             emitSource(source)
         }
     }
@@ -52,7 +52,7 @@ fun <A> networkLiveData(networkCall: suspend () -> VResult<A>): LiveData<VResult
         if (responseStatus.status == SUCCESS) {
             emit(VResult.success(responseStatus.data!!))
         } else if (responseStatus.status == ERROR) {
-            emit(VResult.error(responseStatus.message!!))
+            emit(VResult.error(responseStatus.message!!,null))
         }
     }
 
@@ -63,6 +63,6 @@ fun <V> backgroundLiveData(backgroundCallback: suspend () -> VResult<V>): LiveDa
         try {
             emit(backgroundCallback())
         } catch (e: Exception) {
-            emit(VResult.error(e.message!!))
+            emit(VResult.error(e.message!!,null))
         }
     }
